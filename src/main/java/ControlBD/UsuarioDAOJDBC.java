@@ -17,6 +17,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO{
         {
             conexao = BdConnection.getConnection();
             operacaoInsereUsuario = conexao.prepareStatement("insert into usuario (nome, nomeUsuario, email, senha) values (?, ?, ?, ?)");
+            operacaoListarUsuario = conexao.prepareStatement("select codigoUsuario from usuario where email = ? and senha = ?");
             operacaoListarUsuario2 = conexao.prepareStatement("select codigoUsuario, nome, nomeUsuario from usuario where email = ? and senha = ?");
         }
         catch (Exception ex)
@@ -44,9 +45,10 @@ public class UsuarioDAOJDBC implements UsuarioDAO{
 
     @Override
     public Usuario achar(String email, String senha) throws Exception {
+        operacaoListarUsuario2.clearParameters();
         operacaoListarUsuario2.setString(1, email);
         operacaoListarUsuario2.setString(2, senha);
-        ResultSet resultado = operacaoListarUsuario.executeQuery();
+        ResultSet resultado = operacaoListarUsuario2.executeQuery();
         resultado.next();
         Integer id = resultado.getInt("codigoUsuario");
         String nome = resultado.getString("nome");

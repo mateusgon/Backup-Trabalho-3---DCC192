@@ -8,7 +8,7 @@
     <body>
         <h1>Login</h1>
         <form method="post">
-            <div><label>Usuário: <input name="username" required/></label></div>
+            <div><label>Email: <input name="email" required/></label></div>
             <div><label>Senha: <input name="password" required type="password"/></label></div>
             <div><input type="submit"/></div>
         </form>

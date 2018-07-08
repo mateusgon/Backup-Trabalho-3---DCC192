@@ -17,10 +17,12 @@ public class PostLoginCommand implements Comando{
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             UsuarioDAO uDAO = new UsuarioDAOJDBC();
+            System.out.println("q");
             Usuario usuario = uDAO.achar(email, password);
+            System.out.println("q2");
             HttpSession session = request.getSession();
             session.setAttribute("authUser", usuario.getNome());
-            session.setAttribute("authUser", usuario.getId());
+            session.setAttribute("idUser", usuario.getId());
             response.sendRedirect("index.html");
             return;
         }

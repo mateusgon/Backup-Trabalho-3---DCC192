@@ -13,6 +13,7 @@ public class GetIndexCommand implements Comando{
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("authUser");
+        Integer id = (Integer) session.getAttribute("id");
         if (username == null || username.isEmpty()) {
             Boolean logado = false;
             request.setAttribute("logado", logado);
@@ -21,6 +22,7 @@ public class GetIndexCommand implements Comando{
             return;
         }
         request.setAttribute("authUser", username);
+        request.setAttribute("id", id);
         Boolean logado = true;
         request.setAttribute("logado", logado);
         RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/index.jsp");

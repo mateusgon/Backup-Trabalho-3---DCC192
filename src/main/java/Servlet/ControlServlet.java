@@ -21,6 +21,7 @@ public class ControlServlet extends HttpServlet {
        rotas.put("/index.html", "Command.GetIndexCommand");
        rotas.put("/login.html", "Command.GetLoginCommand");
        rotas.put("/logout.html", "Command.GetLogoutCommand");
+       rotas.put("/usuario-novo.html", "Command.GetCadastroCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();
@@ -35,6 +36,7 @@ public class ControlServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        Map<String, String> rotas = new HashMap<>();
        rotas.put("/login.html", "Command.PostLoginCommand");
+       rotas.put("/usuario-novo.html", "Command.PostCadastroCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();

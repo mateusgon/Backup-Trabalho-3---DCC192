@@ -20,7 +20,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Sistema de Revisão</a>
+                <a class="navbar-brand" href="index.html">Sistema de Revisão</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -42,7 +42,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <c:choose>
                         <c:when test="${!logado}">
-                            <li><a href="#">Cadastrar</a></li>
+                            <li><a href="usuario-novo.html">Cadastrar</a></li>
                             <li><a href="login.html">Login</a></li>
                             </c:when>
                             <c:when test="${logado}">

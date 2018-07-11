@@ -1,5 +1,7 @@
 package Command;
 
+import ControlBD.ItemDAO;
+import ControlBD.ItemDAOJDBC;
 import ControlBD.UsuarioDAO;
 import ControlBD.UsuarioDAOJDBC;
 import Funcionamento.Usuario;
@@ -17,17 +19,14 @@ public class PostItemNovoCommand implements Comando{
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         try
         {
-            Boolean logado = true;
-            UsuarioDAO uDAO = new UsuarioDAOJDBC();
-            String nomeCompleto = request.getParameter("nome");
-            String nomeUsuario = request.getParameter("nomeUsuario");
-            String email = request.getParameter("emailUsuario");
-            String senha = request.getParameter("senhaUsuario");
-            int id = uDAO.criar(nomeCompleto, nomeUsuario, email, senha);
-            Usuario usuario = new Usuario(id, nomeCompleto, nomeUsuario, email, senha);
             HttpSession session = request.getSession();
-            session.setAttribute("authUser", nomeCompleto);
-            session.setAttribute("idUser", id);
+            Integer idUsuario = (Integer) session.getAttribute("idUser");
+            System.out.println(idUsuario);
+            ItemDAO iDAO = new ItemDAOJDBC();
+            String titulo = request.getParameter("titulo");
+            String descricao = request.getParameter("descricao");
+            String url = request.getParameter("url");
+            iDAO.criar(titulo, descricao, url, idUsuario);
             response.sendRedirect("index.html");
         }
         catch(Exception ex)

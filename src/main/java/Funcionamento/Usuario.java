@@ -1,11 +1,14 @@
 package Funcionamento;
 
+import java.util.List;
+
 public class Usuario {
     private Integer id;
     private String nome;
     private String nomeUsuario;
     private String email;
     private String senha;
+    private List<Item> itens;
 
     public Usuario(Integer id, String nome, String nomeUsuario, String email, String senha) {
         this.id = id;
@@ -13,6 +16,15 @@ public class Usuario {
         this.nomeUsuario = nomeUsuario;
         this.email = email;
         this.senha = senha;
+    }
+
+    public Usuario(Integer id, String nome, String nomeUsuario, String email, String senha, List<Item> itens) {
+        this.id = id;
+        this.nome = nome;
+        this.nomeUsuario = nomeUsuario;
+        this.email = email;
+        this.senha = senha;
+        this.itens = itens;
     }
 
     public String getSenha() {

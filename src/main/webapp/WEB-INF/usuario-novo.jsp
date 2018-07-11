@@ -5,17 +5,18 @@
                 <c:when test="${cadastro}">
                     <form method="post">
                         <div class="form-group row">
-                            <label>Nome completo</label>
+                            <label>Nome completo: </label>
                             <input type="text" class="form-control" name="nome" placeholder="Seu nome completo" required>
-                            <label>Nome de usuário</label>
+                            <label>Nome de usuário: </label>
                             <input type="text" class="form-control" name="nomeUsuario" placeholder="Seu nome de usuário" required>
-                            <label>Email</label>
+                            <label>Email: </label>
                             <input type="email" class="form-control" name="emailUsuario" placeholder="Seu email" required>
-                            <label>Senha</label>
+                            <label>Senha: </label>
                             <input type="password" class="form-control" name="senhaUsuario" size="20" placeholder="Sua senha" required>
-                            <input type="submit" class="btn btn-success"/>
-                            <input type="reset" class="btn btn-secondary"/>
                         </div>
+                        <button type="submit" class="btn btn-success">Enviar</button>
+                        <button type="reset" class="btn btn-secondary">Limpar</button>
+                        
                     </form>
                 </c:when>
                 <c:when test="${!cadastro}">
@@ -30,9 +31,10 @@
                             <input type="email" class="form-control" name="emailUsuario" placeholder="Seu email" required>
                             <label>Senha</label>
                             <input type="password" class="form-control" name="senhaUsuario" size="20" placeholder="Sua senha" required>
-                            <input type="submit" class="btn btn-success"/>
-                            <input type="reset" class="btn btn-secondary"/>
                         </div>
+                             <button type="submit" class="btn btn-success">Enviar</button>
+                            <button type="reset" class="btn btn-secondary">Limpar</button>
+                       
                     </form>
                 </c:when>
             </c:choose>

@@ -1,20 +1,26 @@
 package ControlBD;
 
+import Funcionamento.Item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class ItemDAOJDBC implements ItemDAO{
 
     private Connection conexao;
     private PreparedStatement operacaoInsereItem;
+    private PreparedStatement operacaoListar;
 
     public ItemDAOJDBC() throws Exception {
         conexao = BdConnection.getConnection();
         operacaoInsereItem = conexao.prepareStatement("insert into item (titulo, descricao, links, dataInicial, fk_codigoCriador) values (?, ?, ?, ?, ?)");
+        operacaoListar = conexao.prepareStatement("select codigoItem, titulo, descricao, links, dataInicial, dataAtualizacao from item where fk_codigoCriador = ?");
     }
     
     @Override
@@ -32,6 +38,26 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoInsereItem.setTimestamp(4, dataSqlCriacao);
         operacaoInsereItem.setInt(5,idUsuario);
         operacaoInsereItem.executeUpdate();
+    }
+
+    @Override
+    public List<Item> listarItensUsuario(Integer idUsuario) throws Exception {
+        List<Item> itens = new ArrayList<>();
+        operacaoListar.clearParameters();
+        operacaoListar.setInt(1, idUsuario);
+        ResultSet resultado = operacaoListar.executeQuery();
+        while (resultado.next())
+        {
+            Item i = new Item();
+            i.setIdItem(resultado.getInt("codigoItem"));
+            i.setTitulo(resultado.getString("titulo"));
+            i.setDescricao(resultado.getString("descricao"));
+            i.setLinks(resultado.getString("links"));
+            i.setDataInicial(resultado.getTimestamp("dataInicial"));
+            i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
+            itens.add(i);
+        }
+        return itens;
     }
     
 }

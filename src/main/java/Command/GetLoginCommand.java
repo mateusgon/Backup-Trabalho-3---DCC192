@@ -14,7 +14,7 @@ public class GetLoginCommand implements Comando{
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{        
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("authUser");
-        Integer id = (Integer) session.getAttribute("id");
+        Integer id = (Integer) session.getAttribute("idUser");
         if (username == null || username.isEmpty()) {
             Boolean login = true;
             request.setAttribute("login", login);

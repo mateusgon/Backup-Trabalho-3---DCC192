@@ -5,9 +5,9 @@
                 <div class="form-group row">
                     <label>Título do produto: </label>
                     <input type="text" class="form-control" name="titulo" placeholder="Digite o título do produto" required>
-                    <label>Descrição</label>
+                    <label>Descrição: </label>
                     <input type="text" class="form-control" name="descricao" placeholder="Descrição do seu item" required>
-                    <label>Link</label>
+                    <label>Link: </label>
                     <input type="url" class="form-control" name="url" placeholder="Digite o link" required>
                     <input type="submit" class="btn btn-success"/>
                     <input type="reset" class="btn btn-secondary"/>

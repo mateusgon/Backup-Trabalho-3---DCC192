@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControlServlet", urlPatterns = {"/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html"})
+@WebServlet(name = "ControlServlet", urlPatterns = {"/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html", "/meus-itens.html"})
 public class ControlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,16 +23,16 @@ public class ControlServlet extends HttpServlet {
        rotas.put("/logout.html", "Command.GetLogoutCommand");
        rotas.put("/usuario-novo.html", "Command.GetCadastroCommand");
        rotas.put("/item-novo.html", "Command.GetItemNovoCommand");
-       rotas.put("/item-editar.html", "Command.GetItemEditarCommand");
+       rotas.put("/meus-itens.html", "Command.GetMeusItensCommand");
        rotas.put("/item-listar.html", "Command.GetItemListarCommand");
+       rotas.put("/item-editar.html", "Command.GetItemEditarCommand");
        rotas.put("/item-excluir.html", "Command.GetItemExcluirCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();
             comando.exec(request, response);
-       } catch (ClassNotFoundException|IllegalAccessException|InstantiationException ex) {
-            response.sendError(500, "Erro: "+ex);
-            Logger.getLogger(ControlServlet.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (Exception ex) {
+            response.sendRedirect("index.html");
        } 
     }
 

@@ -5,22 +5,28 @@
                 <c:when test="${login}">
                     <form method="post">
                         <div class="form-group row">
-                               <label>Email: <input name="email" required type="email"/></label>
-                               <label>Senha: <input name="password" required type="password"/></label></div>
-                               <input type="submit" class="btn btn-success"/>
-                               <input type="reset" class="btn btn-secondary"/>
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="Seu email" required>
+                            <label>Senha</label>
+                            <input type="password" class="form-control" name="password" size="20" placeholder="Sua senha" required>
                         </div>
+                             <button type="submit" class="btn btn-success">Enviar</button>
+                            <button type="reset" class="btn btn-secondary">Limpar</button>
+                       
                     </form>
                 </c:when>
                 <c:when test="${!login}">
                     <h5><font color="FF0000"> Algo informado não está certo! Digite novamente </font></h5>
                     <form method="post">
                         <div class="form-group row">
-                            <label>Email: <input name="email" required type="email"/></label>
-                            <label>Senha: <input name="password" required type="password"/></label>
-                            <input type="submit" class="btn btn-success"/>
-                            <input type="reset" class="btn btn-secondary"/>
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="Seu email" required>
+                            <label>Senha</label>
+                            <input type="password" class="form-control" name="password" size="20" placeholder="Sua senha" required>
                         </div>
+                             <button type="submit" class="btn btn-success">Enviar</button>
+                            <button type="reset" class="btn btn-secondary">Limpar</button>
+                       
                     </form>
                 </c:when>
             </c:choose>

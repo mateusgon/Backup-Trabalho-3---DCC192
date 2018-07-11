@@ -5,64 +5,76 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/    bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <title> Sistema de revisão </title>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">Sistema de Revisão</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <c:choose>
-                        <c:when test="${logado}">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Itens <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Ranking de itens</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="item-novo.html">Criar item</a></li>
-                                    <li><a href="#">Editar meus itens</a></li>
-                                    <li><a href="#">Listar meus itens</a></li>
-                                    <li><a href="#">Excluir meus itens</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Comentários <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Itens a serem avaliados</a></li>
-                                    <li><a href="#">Meus comentários</a></li>
-                                </ul>
-                            </li>
-                        </c:when>
-                    </c:choose>
-                    <li><a href="#"> Curadores </a></li>
-                    <li><a href="#"> Trolls </a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <c:choose>
-                        <c:when test="${!logado}">
-                            <li><a href="usuario-novo.html">Cadastrar</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            </c:when>
-                            <c:when test="${logado}">
-                                <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conta <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Editar</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="logout.html">Sair</a></li>
-                                </ul>
-                            </c:when>
-                        </c:choose>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Sistema de revisão</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <c:choose>
+                    <c:when test="${logado}">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Itens
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Ranking de itens</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="item-novo.html">Criar item</a>
+                                <a class="dropdown-item" href="meus-itens.html">Meus itens</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Comentários
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Itens a serem avaliados</a>
+                                <a class="dropdown-item" href="#">Meus comentários</a>
+                            </div>
+                        </li>
+                    </c:when>
+                </c:choose>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Curadores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Trolls</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <c:choose>
+                    <c:when test="${!logado}">
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Entrar
+                            </a>
+                                <div class="dropdown-menu">
+                                <a class="dropdown-item" href="login.html">Login</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="usuario-novo.html">Criar conta</a>
+                                </div>
+                        </div>
+                    </c:when>
+                    <c:when test="${logado}">
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Conta
+                            </a>
+                                <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Editar</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="logout.html">Sair</a>
+                                </div>
+                        </div>
+                    </c:when>
+                </c:choose>
+            </form>
+        </div>
     </nav>
 </head>
 <body>

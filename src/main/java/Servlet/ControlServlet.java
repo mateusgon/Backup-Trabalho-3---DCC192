@@ -2,6 +2,7 @@ package Servlet;
 
 import Command.Comando;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControlServlet", urlPatterns = {"/index.html", "/login.html", "/logout.html", "/usuario-novo.html"})
+@WebServlet(name = "ControlServlet", urlPatterns = {"/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html"})
 public class ControlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,6 +41,7 @@ public class ControlServlet extends HttpServlet {
        Map<String, String> rotas = new HashMap<>();
        rotas.put("/login.html", "Command.PostLoginCommand");
        rotas.put("/usuario-novo.html", "Command.PostCadastroCommand");
+       rotas.put("/item-novo.html", "Command.PostItemNovoCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();

@@ -4,6 +4,7 @@ import ControlBD.UsuarioDAO;
 import ControlBD.UsuarioDAOJDBC;
 import Funcionamento.Usuario;
 import java.io.IOException;
+import java.text.ParseException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSession;
 public class PostCadastroCommand implements Comando{
 
     @Override
-    public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         try
         {
             Boolean logado = true;

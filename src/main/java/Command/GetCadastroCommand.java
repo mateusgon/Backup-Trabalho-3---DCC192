@@ -1,6 +1,7 @@
 package Command;
 
 import java.io.IOException;
+import java.text.ParseException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ public class GetCadastroCommand implements Comando{
         String username = (String) session.getAttribute("authUser");
         Integer id = (Integer) session.getAttribute("id");
         if (username == null || username.isEmpty()) {
+            request.setAttribute("cadastro", true);
             RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/usuario-novo.jsp");
             dispacher.forward(request, response);
             return;

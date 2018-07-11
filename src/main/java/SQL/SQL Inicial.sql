@@ -20,6 +20,6 @@ create table item (
     links varchar(500),
     dataInicial timestamp not null,
     dataAtualizacao timestamp,
-    fk_codigoCriador integer,
+    fk_codigoCriador integer not null,
     foreign key (fk_codigoCriador) references usuario (codigoUsuario)
 )

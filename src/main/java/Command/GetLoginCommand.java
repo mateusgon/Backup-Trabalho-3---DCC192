@@ -11,8 +11,21 @@ public class GetLoginCommand implements Comando{
 
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
-        RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/login.jsp");
-        dispacher.forward(request, response);
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("authUser");
+        Integer id = (Integer) session.getAttribute("id");
+        if (username == null || username.isEmpty()) {
+            Boolean login = true;
+            request.setAttribute("login", login);
+            RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/login.jsp");
+            dispacher.forward(request, response);
+            return;
+        }
+        else
+        {
+            response.sendRedirect("index.html");
+            return;
+        }
     }
     
 }

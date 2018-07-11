@@ -27,9 +27,7 @@ public class PostCadastroCommand implements Comando{
             HttpSession session = request.getSession();
             session.setAttribute("authUser", nomeCompleto);
             session.setAttribute("idUser", id);
-            RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/index.jsp");
-            request.setAttribute("logado", logado);
-            dispacher.forward(request, response);
+            response.sendRedirect("index.html");
         }
         catch(Exception ex)
         {

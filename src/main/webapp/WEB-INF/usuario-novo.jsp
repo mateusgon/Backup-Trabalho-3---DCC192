@@ -7,7 +7,6 @@
                         <div class="form-group row">
                             <label>Nome completo</label>
                             <input type="text" class="form-control" name="nome" placeholder="Seu nome completo" required>
-                        <div class="form-group row">
                             <label>Nome de usuário</label>
                             <input type="text" class="form-control" name="nomeUsuario" placeholder="Seu nome de usuário" required>
                             <label>Email</label>

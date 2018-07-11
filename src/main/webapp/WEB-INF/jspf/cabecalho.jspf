@@ -14,30 +14,34 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href="index.html">Sistema de Revisão</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
+                    <c:choose>
+                        <c:when test="${logado}">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Itens <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Ranking de itens</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Criar item</a></li>
+                                    <li><a href="#">Editar meus itens</a></li>
+                                    <li><a href="#">Listar meus itens</a></li>
+                                    <li><a href="#">Excluir meus itens</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Comentários <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Itens a serem avaliados</a></li>
+                                    <li><a href="#">Meus comentários</a></li>
+                                </ul>
+                            </li>
+                        </c:when>
+                    </c:choose>
+                    <li><a href="#"> Curadores </a></li>
+                    <li><a href="#"> Trolls </a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <c:choose>
@@ -47,11 +51,9 @@
                             </c:when>
                             <c:when test="${logado}">
                                 <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conta <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
+                                    <li><a href="#">Editar</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="logout.html">Sair</a></li>
                                 </ul>

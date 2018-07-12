@@ -7,7 +7,6 @@
         <table class="table table-light">
             <thead>
                 <tr>
-                    <th scope="col">Código</th>
                     <th scope="col">Título</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -15,12 +14,10 @@
             <tbody>
                 <c:forEach var="itens" items="${itens}">
                     <tr>
-                    <th>${itens.idItem}</th>
-                    <th>${itens.titulo}</th>
+                        <th> <a href="item-listar.html?item=${itens.idItem}"> ${itens.titulo} </a> </th>
                     <th> 
-                         <a href=""> <i class="material-icons">description</i> </a>
-                        <a href=""> <i class="material-icons">mode_edit</i> </a>
-                        <a href=""> <i class="material-icons">delete</i> </a>
+                        <a href="item-editar.html?item=${itens.idItem}"> <i class="material-icons">mode_edit</i> </a>
+                        <a href="item-excluir.html?item=${itens.idItem}"> <i class="material-icons">delete</i> </a>
                     </th>
                     </tr>
                 </c:forEach>

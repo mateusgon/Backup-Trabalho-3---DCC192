@@ -16,11 +16,13 @@ public class ItemDAOJDBC implements ItemDAO{
     private Connection conexao;
     private PreparedStatement operacaoInsereItem;
     private PreparedStatement operacaoListar;
+    private PreparedStatement operacaoExcluir;
 
     public ItemDAOJDBC() throws Exception {
         conexao = BdConnection.getConnection();
         operacaoInsereItem = conexao.prepareStatement("insert into item (titulo, descricao, links, dataInicial, fk_codigoCriador) values (?, ?, ?, ?, ?)");
         operacaoListar = conexao.prepareStatement("select codigoItem, titulo, descricao, links, dataInicial, dataAtualizacao from item where fk_codigoCriador = ?");
+        operacaoExcluir = conexao.prepareStatement("delete from item where codigoItem = ?");
     }
     
     @Override
@@ -58,6 +60,13 @@ public class ItemDAOJDBC implements ItemDAO{
             itens.add(i);
         }
         return itens;
+    }
+
+    @Override
+    public void excluirItem(Integer idItem) throws Exception {
+        operacaoExcluir.clearParameters();
+        operacaoExcluir.setInt(1, idItem);
+        operacaoExcluir.execute();
     }
     
 }

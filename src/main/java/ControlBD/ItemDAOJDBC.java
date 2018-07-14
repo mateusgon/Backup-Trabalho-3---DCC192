@@ -16,6 +16,7 @@ public class ItemDAOJDBC implements ItemDAO{
     private Connection conexao;
     private PreparedStatement operacaoInsereItem;
     private PreparedStatement operacaoListar;
+    private PreparedStatement operacaoListarAll;
     private PreparedStatement operacaoExcluir;
     private PreparedStatement operacaoExibir;
 
@@ -24,6 +25,7 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoInsereItem = conexao.prepareStatement("insert into item (titulo, descricao, links, dataInicial, fk_codigoCriador) values (?, ?, ?, ?, ?)");
         operacaoListar = conexao.prepareStatement("select codigoItem, titulo, descricao, links, dataInicial, dataAtualizacao "
                 + "from item where fk_codigoCriador = ?");
+        operacaoListarAll = conexao.prepareStatement("select * from item");
         operacaoExibir = conexao.prepareStatement("select *  from item where codigoItem = ?");
         operacaoExcluir = conexao.prepareStatement("delete from item where codigoItem = ?");
     }
@@ -65,6 +67,26 @@ public class ItemDAOJDBC implements ItemDAO{
         return itens;
     }
 
+    @Override
+    public List<Item> listarAllItens() throws Exception {
+        List<Item> itens = new ArrayList<>();
+        operacaoListarAll.clearParameters();
+        ResultSet resultado = operacaoListarAll.executeQuery();
+        while (resultado.next())
+        {
+            Item i = new Item();
+            i.setIdItem(resultado.getInt("codigoItem"));
+            i.setTitulo(resultado.getString("titulo"));
+            i.setDescricao(resultado.getString("descricao"));
+            i.setLinks(resultado.getString("links"));
+            i.setDataInicial(resultado.getTimestamp("dataInicial"));
+            i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
+            itens.add(i);
+        }
+        return itens;
+    }
+
+    
     @Override
     public void excluirItem(Integer idItem) throws Exception {
         operacaoExcluir.clearParameters();

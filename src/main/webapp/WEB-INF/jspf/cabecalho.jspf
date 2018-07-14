@@ -33,7 +33,7 @@
                                 Comentários
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/item-listar.html">Itens a serem avaliados</a>
+                                <a class="dropdown-item" href="item-listar.html">Itens a serem avaliados</a>
                                 <a class="dropdown-item" href="#">Meus comentários</a>
                             </div>
                         </li>

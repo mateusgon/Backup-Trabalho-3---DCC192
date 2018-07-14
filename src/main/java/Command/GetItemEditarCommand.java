@@ -12,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 public class GetItemEditarCommand implements Comando {
 
-    Item item = new Item();
-
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -23,6 +21,7 @@ public class GetItemEditarCommand implements Comando {
             try {
                 Integer id2 = Integer.parseInt(request.getParameter("item"));
                 ItemDAO iDAO = new ItemDAOJDBC();
+                Item item = new Item();
                 item = iDAO.exibirItem(id2);
                 Boolean logado = true;
                 request.setAttribute("item", item);

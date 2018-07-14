@@ -1,15 +1,53 @@
 package Command;
 
+import ControlBD.ItemDAO;
+import ControlBD.ItemDAOJDBC;
+import Funcionamento.Item;
 import java.io.IOException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class GetItemListarCommand implements Comando{
 
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("authUser");
+        Integer id = (Integer) session.getAttribute("idUser");
+        if (username != null || !username.isEmpty()) {
+            try {
+                ItemDAO iDAO = new ItemDAOJDBC();
+                Integer id2 = Integer.parseInt(request.getParameter("item"));
+                Boolean logado = true;
+                Item item = new Item();
+                item = iDAO.exibirItem(id2);
+                if (id2 == item.getIdItem())
+                {
+                    request.setAttribute("donoItem", true);
+                }
+                else
+                {
+                    request.setAttribute("donoItem", false);
+                }
+                request.setAttribute("item", item);
+                request.setAttribute("logado", logado);
+                RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/item-listar.jsp");
+                dispacher.forward(request, response);
+                return;
+            } catch (Exception ex) {
+
+            }
+        }
+        else
+        {
+            response.sendRedirect("index.html");
+            return;
+        }
     }
-    
+
 }
+    

@@ -11,7 +11,7 @@ create table usuario(
     nomeUsuario varchar (500) not null,
     email varchar(500) not null,
     senha varchar(500) not null
-)
+);
 
 create table item (
     codigoItem integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -22,4 +22,4 @@ create table item (
     dataAtualizacao timestamp,
     fk_codigoCriador integer not null,
     foreign key (fk_codigoCriador) references usuario (codigoUsuario)
-)
+);

@@ -21,7 +21,6 @@ public class PostItemNovoCommand implements Comando{
         {
             HttpSession session = request.getSession();
             Integer idUsuario = (Integer) session.getAttribute("idUser");
-            System.out.println(idUsuario);
             ItemDAO iDAO = new ItemDAOJDBC();
             String titulo = request.getParameter("titulo");
             String descricao = request.getParameter("descricao");

@@ -19,6 +19,7 @@ public class ItemDAOJDBC implements ItemDAO{
     private PreparedStatement operacaoListarAll;
     private PreparedStatement operacaoExcluir;
     private PreparedStatement operacaoExibir;
+    private PreparedStatement operacaoAlterar;
 
     public ItemDAOJDBC() throws Exception {
         conexao = BdConnection.getConnection();
@@ -28,6 +29,7 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoListarAll = conexao.prepareStatement("select * from item");
         operacaoExibir = conexao.prepareStatement("select *  from item where codigoItem = ?");
         operacaoExcluir = conexao.prepareStatement("delete from item where codigoItem = ?");
+        operacaoAlterar = conexao.prepareStatement("update item set titulo = ?, descricao = ?, links = ?, dataAtualizacao = ? where codigoItem = ?");
     }
     
     @Override
@@ -111,6 +113,23 @@ public class ItemDAOJDBC implements ItemDAO{
             i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
         }
         return i;
+    }
+
+    @Override
+    public void alterar(Integer id, String titulo, String descricao, String links) throws Exception{
+        operacaoAlterar.clearParameters();
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+        Calendar cal = Calendar.getInstance();
+        Date data = new Date();
+        cal.setTime(data);
+        java.sql.Timestamp dataSqlAtualizacao;
+        dataSqlAtualizacao = new java.sql.Timestamp(data.getTime());
+        operacaoAlterar.setString(1, titulo);
+        operacaoAlterar.setString(2, descricao);
+        operacaoAlterar.setString(3, links);
+        operacaoAlterar.setTimestamp(4, dataSqlAtualizacao);
+        operacaoAlterar.setInt(5, id);
+        operacaoAlterar.executeUpdate();
     }
     
 }

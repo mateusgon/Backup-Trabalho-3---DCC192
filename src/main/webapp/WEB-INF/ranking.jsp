@@ -91,13 +91,11 @@
                 </div>
                 <div class="card-footer text-muted">
                     <i class="material-icons" font-size = "1rem" >thumb_up</i> 
-                    <i class="material-icons" font-size = "1rem" >thumb_down</i> 
-                                      
+                    <i class="material-icons" font-size = "1rem" >thumb_down</i>                         
                 </div>
             </div>
         </div>
-    
-        
-    </div>
-    
+    </div>    
 </div>
+
+<%@include file="jspf/rodape.jspf" %>

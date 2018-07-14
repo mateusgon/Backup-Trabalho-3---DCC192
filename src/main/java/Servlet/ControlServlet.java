@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControlServlet", urlPatterns = {"/item-editar.html","/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html", "/meus-itens.html", "/item-excluir.html", "/item-listar.html", "/item-editar.html"})
+@WebServlet(name = "ControlServlet", urlPatterns = {"/item-editar.html","/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html", "/meus-itens.html", "/item-excluir.html", "/item-listar.html", "/item-editar.html", "/ranking.html"})
 public class ControlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,6 +27,7 @@ public class ControlServlet extends HttpServlet {
        rotas.put("/item-listar.html", "Command.GetItemListarCommand");
        rotas.put("/item-editar.html", "Command.GetItemEditarCommand");
        rotas.put("/item-excluir.html", "Command.GetItemExcluirCommand");
+       rotas.put("/ranking.html", "Command.GetRankingCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();
@@ -42,6 +43,7 @@ public class ControlServlet extends HttpServlet {
        rotas.put("/login.html", "Command.PostLoginCommand");
        rotas.put("/usuario-novo.html", "Command.PostCadastroCommand");
        rotas.put("/item-novo.html", "Command.PostItemNovoCommand");
+       rotas.put("/item-editar.html", "Command.PostItemAlterarCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();

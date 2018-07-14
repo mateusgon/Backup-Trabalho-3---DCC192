@@ -2,7 +2,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="jspf/cabecalho.jspf" %>
 
-
 <%
     Item item = (Item) request.getAttribute("item");
 %>
@@ -16,6 +15,7 @@
                     <input value = "<%=item.getDescricao()%>" type="text" class="form-control" name="descricao" placeholder="Descrição do seu item" required>
                     <label>Link: </label>
                     <input value = "<%=item.getLinks()%>" type="url" class="form-control" name="url" placeholder="Digite o link" required>
+                    <input value="<%=item.getIdItem()%>" type="hidden" name="idItem" class="form-control">
                     <input type="submit" class="btn btn-success"/>
                     <input type="reset" class="btn btn-secondary"/>
                 </div>

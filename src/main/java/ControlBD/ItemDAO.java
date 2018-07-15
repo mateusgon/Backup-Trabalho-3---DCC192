@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ItemDAO {
 
-    public Item exibirItem(Integer idItem) throws Exception;
+    public Item exibirItem(Integer id, Integer idItem) throws Exception;
     public List<Item> listarAllItensOrdemDataInicial() throws Exception;
     public List<Item> listarAllItensOrdemDataFinal() throws Exception;
     public List<Item> listarAllItensOrdemCodigo() throws Exception;

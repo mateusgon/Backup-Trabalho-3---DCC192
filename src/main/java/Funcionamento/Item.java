@@ -10,6 +10,8 @@ public class Item {
     private Date dataInicial;
     private Date dataAtualizacao;
     private Integer idCriador;
+    private Integer positivo;
+    private Integer negativo;
 
     public Item(String titulo, String descricao, String links, Date dataInicial, Date dataAtualizacao, Integer idCriador) {
         this.titulo = titulo;
@@ -77,6 +79,22 @@ public class Item {
 
     public void setIdItem(Integer idItem) {
         this.idItem = idItem;
+    }
+
+    public Integer getPositivo() {
+        return positivo;
+    }
+
+    public void setPositivo(Integer positivo) {
+        this.positivo = positivo;
+    }
+
+    public Integer getNegativo() {
+        return negativo;
+    }
+
+    public void setNegativo(Integer negativo) {
+        this.negativo = negativo;
     }
     
     

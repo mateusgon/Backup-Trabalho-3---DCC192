@@ -23,7 +23,7 @@ public class GetComentarCommand implements Comando{
                 Integer id2 = Integer.parseInt(request.getParameter("item"));
                 Boolean logado = true;
                 Item item = new Item();
-                item = iDAO.exibirItem(id2);
+                item = iDAO.exibirItem(id, id2);
                 request.setAttribute("item", item);
                 request.setAttribute("logado", logado);
                 RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/comentar.jsp");

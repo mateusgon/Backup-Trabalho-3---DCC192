@@ -34,3 +34,23 @@ create table comentario (
     foreign key (fk_codigoCriador) references usuario (codigoUsuario),
     foreign key (fk_codigoItem) references item (codigoItem)
 );
+
+create table usuarioitem (
+    codigoAvaliarItem integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    positiva smallint,
+    negativa smallint,
+    fk_codigoUsuario integer not null,
+    fk_codigoItem integer not null,
+    foreign key (fk_codigoUsuario) references usuario (codigoUsuario),
+    foreign key (fk_codigoItem) references item (codigoItem)
+);
+
+create table usuariocomentario (
+    codigoAvaliarComentario integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    positiva smallint,
+    negativa smallint,
+    fk_codigoUsuario integer not null,
+    fk_codigoComentario integer not null,
+    foreign key (fk_codigoUsuario) references usuario (codigoUsuario),
+    foreign key (fk_codigoComentario) references comentario (codigoComentario)
+);

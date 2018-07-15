@@ -30,7 +30,7 @@ public class GetItemListarCommand implements Comando{
                 Integer id2 = Integer.parseInt(request.getParameter("item"));
                 Boolean logado = true;
                 Item item = new Item();
-                item = iDAO.exibirItem(id2);
+                item = iDAO.exibirItem(id, id2);
                 List<Comentario> comentarios = cDAO.listarComentariosItem(id2);
                 for (Comentario comentario : comentarios) {
                     if(comentario.getIdUsuario() == id)

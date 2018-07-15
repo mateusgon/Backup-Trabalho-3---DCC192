@@ -9,6 +9,8 @@ public class Comentario {
     private Date atualizacao;
     private Integer idItem;
     private Integer idUsuario;
+    private Integer positivo;
+    private Integer negativo;
 
     public Comentario() {
     }
@@ -71,6 +73,22 @@ public class Comentario {
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    public Integer getPositivo() {
+        return positivo;
+    }
+
+    public Integer getNegativo() {
+        return negativo;
+    }
     
+    public void setPositivo(Integer positivo)
+    {
+        this.positivo = positivo;
+    }
     
+    public void setNegativo(Integer negativo)
+    {
+        this.negativo = negativo;
+    }
 }

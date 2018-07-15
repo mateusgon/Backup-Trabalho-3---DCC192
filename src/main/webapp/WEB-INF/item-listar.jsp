@@ -19,8 +19,8 @@
                         </c:choose>
                     <c:choose>
                         <c:when test="${item.idCriador != idUser}">
-                            <a href=""> <i class="material-icons" font-size = "1rem" >thumb_up</i> </a>
-                            <a href=""> <i class="material-icons" font-size = "1rem" >thumb_down</i> </a> 
+                            <a href="avaliar.html?i=${item.idItem}&c=0&p=1&n=0"> <i class="material-icons" font-size = "1rem" >thumb_up</i> ${item.positivo} </a>
+                            <a href="avaliar.html?i=${item.idItem}&c=0&p=0&n=1"> <i class="material-icons" font-size = "1rem" >thumb_down</i> ${item.negativo} </a> 
                         </c:when>    
                     </c:choose>        
                     </p>
@@ -46,6 +46,12 @@
                             <c:when test="${comentarios.idUsuario == idUser}">
                                 <a href="comentario-editar.html?comentario=${comentarios.id}&item=${item.idItem}"> <i class="material-icons">mode_edit</i> </a>
                                 <a href="comentario-excluir.html?comentario=${comentarios.id}&item=${item.idItem}"> <i class="material-icons">delete</i> </a>
+                            </c:when>    
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${comentarios.idUsuario != idUser}">
+                                <a href="avaliar.html?i=${item.idItem}&c=${comentarios.id}&p=1&n=0"> <i class="material-icons" font-size = "1rem" >thumb_up</i> ${comentarios.positivo} </a> 
+                                <a href="avaliar.html?i=${item.idItem}&c=${comentarios.id}&p=0&n=1"> <i class="material-icons" font-size = "1rem" >thumb_down</i> ${comentarios.negativo} </a>  
                             </c:when>    
                         </c:choose>
                         </p>

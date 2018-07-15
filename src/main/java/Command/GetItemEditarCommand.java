@@ -22,7 +22,7 @@ public class GetItemEditarCommand implements Comando {
                 Integer id2 = Integer.parseInt(request.getParameter("item"));
                 ItemDAO iDAO = new ItemDAOJDBC();
                 Item item = new Item();
-                item = iDAO.exibirItem(id2);
+                item = iDAO.exibirItem(id, id2);
                 Boolean logado = true;
                 request.setAttribute("item", item);
                 request.setAttribute("logado", logado);

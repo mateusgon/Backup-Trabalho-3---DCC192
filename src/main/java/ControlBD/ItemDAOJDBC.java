@@ -142,7 +142,7 @@ public class ItemDAOJDBC implements ItemDAO {
     }
 
     @Override
-    public Item exibirItem(Integer idItem) throws Exception {
+    public Item exibirItem(Integer id, Integer idItem) throws Exception {
         operacaoExcluir.clearParameters();
         operacaoExibir.setInt(1, idItem);
         operacaoExibir.execute();
@@ -157,7 +157,34 @@ public class ItemDAOJDBC implements ItemDAO {
             i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
             i.setIdCriador(resultado.getInt("fk_codigoCriador"));
         }
-        return i;
+        AvaliarItemDAO aI = new AvaliarItemDAOJDBC();
+        try{
+            i.setPositivo(aI.listarEspecificoPositivo(id, idItem));
+            try
+            {
+                i.setNegativo(aI.listarEspecificoNegativo(id, idItem));
+                return i;
+            }
+            catch (Exception ex)
+            {
+                i.setNegativo(0);
+                return i;
+            }
+        }
+        catch(Exception ex)
+        {
+            try
+            {
+                i.setNegativo(aI.listarEspecificoNegativo(id, idItem));
+                return i;
+            }
+            catch (Exception ex2)
+            {                
+                i.setPositivo(0);
+                i.setNegativo(0);
+                return i;
+            }
+        }
     }
 
     @Override

@@ -54,8 +54,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
         operacaoListar.clearParameters();
         operacaoListar.setInt(1, idItem);
         ResultSet resultado = operacaoListar.executeQuery();
-        while (resultado.next())
-        {
+        while (resultado.next()) {
             Comentario c = new Comentario();
             c.setId(resultado.getInt("codigoComentario"));
             c.setComentario(resultado.getString("comentario"));
@@ -63,7 +62,26 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
             c.setAtualizacao(resultado.getTimestamp("dataAtualizacao"));
             c.setIdItem(resultado.getInt("fk_codigoItem"));
             c.setIdUsuario(resultado.getInt("fk_codigoCriador"));
-            comentarios.add(c);
+            AvaliarComentarioDAO aDAO = new AvaliarComentarioDAOJDBC();
+            try {
+                c.setPositivo(aDAO.listarEspecificoPositivo(c.getId()));
+                try {
+                    c.setNegativo(aDAO.listarEspecificoNegativo(c.getId()));
+                    comentarios.add(c);
+                } catch (Exception ex) {
+                    c.setNegativo(0);
+                    comentarios.add(c);
+                }
+            } catch (Exception ex) {
+                try {
+                    c.setNegativo(aDAO.listarEspecificoNegativo(c.getId()));
+                    comentarios.add(c);
+                } catch (Exception ex2) {
+                    c.setPositivo(0);
+                    c.setNegativo(0);
+                    comentarios.add(c);
+                }
+            }
         }
         return comentarios;
     }

@@ -29,6 +29,13 @@
                             <p> Item url: ${item.links} </p>
                             <a href="comentar.html?item=${item.idItem}" class="btn btn-primary">Comentar</a>
                         </th>
+                        <c:forEach var="comentarios" items="${comentarios}">
+                        <tr>
+                            <th>
+                                 ${comentarios.comentario}
+                            </th>
+                        </tr>
+                        </c:forEach>
                     </tr>
             </tbody>
         </table>

@@ -1,20 +1,27 @@
 package ControlBD;
 
+import Funcionamento.Comentario;
+import Funcionamento.Item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class ComentarioDAOJDBC implements ComentarioDAO{
 
     private Connection conexao;
     private PreparedStatement operacaoCriar;
+    private PreparedStatement operacaoListar;
     
     public ComentarioDAOJDBC() throws Exception{
         conexao = BdConnection.getConnection();
         operacaoCriar = conexao.prepareStatement("insert into comentario (comentario, dataInicial, fk_codigoCriador, fk_codigoItem) values (?, ?, ?, ?)");
+        operacaoListar = conexao.prepareStatement("select codigoComentario, comentario, dataInicial, dataAtualizacao, fk_codigoCriador, fk_codigoItem from comentario where fk_codigoItem = ?");
     }
 
     @Override
@@ -31,6 +38,26 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
         operacaoCriar.setInt(3, idUsuario);
         operacaoCriar.setInt(4, idItem);
         operacaoCriar.executeUpdate();
+    }
+
+    @Override
+    public List<Comentario> listarComentariosItem(Integer idItem) throws Exception {
+        List<Comentario> comentarios = new ArrayList<>();
+        operacaoListar.clearParameters();
+        operacaoListar.setInt(1, idItem);
+        ResultSet resultado = operacaoListar.executeQuery();
+        while (resultado.next())
+        {
+            Comentario c = new Comentario();
+            c.setId(resultado.getInt("codigoComentario"));
+            c.setComentario(resultado.getString("comentario"));
+            c.setCriacao(resultado.getTimestamp("dataInicial"));
+            c.setAtualizacao(resultado.getTimestamp("dataAtualizacao"));
+            c.setIdItem(resultado.getInt("fk_codigoItem"));
+            c.setIdUsuario(resultado.getInt("fk_codigoCriador"));
+            comentarios.add(c);
+        }
+        return comentarios;
     }
     
 }

@@ -2,7 +2,7 @@ package Funcionamento;
 
 import java.util.Date;
 
-public class Comentário {
+public class Comentario {
     private Integer id;
     private String comentario;
     private Date criacao;
@@ -10,10 +10,10 @@ public class Comentário {
     private Integer idItem;
     private Integer idUsuario;
 
-    public Comentário() {
+    public Comentario() {
     }
 
-    public Comentário(Integer id, String comentario, Date criacao, Date atualizacao, Integer idItem, Integer idUsuario) {
+    public Comentario(Integer id, String comentario, Date criacao, Date atualizacao, Integer idItem, Integer idUsuario) {
         this.id = id;
         this.comentario = comentario;
         this.criacao = criacao;

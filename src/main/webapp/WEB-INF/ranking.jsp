@@ -3,7 +3,13 @@
 
 <div class="container" style="margin-top: 4cm" >
     <h1> Todos os itens</h1>
+<div class="container" style="margin-top: 1cm" >
 
+    <ul>
+        <li><a href="#" />Ordernar por Data Recente</li></a>
+        <li><a href="#" />Ordernar por Popularidade</li></a>
+        <li><a href="#" />Ordernar por Data Antiga</li></a>
+    </ul>
     <div class="row" style="margin-top: 1.5cm">
         <div class="col-sm-6">
             <div class="card">

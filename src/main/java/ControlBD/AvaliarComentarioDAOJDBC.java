@@ -5,6 +5,8 @@ import Funcionamento.AvaliarItem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AvaliarComentarioDAOJDBC implements AvaliarComentarioDAO{
 
@@ -14,6 +16,7 @@ public class AvaliarComentarioDAOJDBC implements AvaliarComentarioDAO{
     private PreparedStatement operacaoAtualizar;
     private PreparedStatement operacaoListarPositivo;
     private PreparedStatement operacaoListarNegativo;
+    private PreparedStatement operacaoListarComentarios;
    
     public AvaliarComentarioDAOJDBC() throws Exception{
         conexao = BdConnection.getConnection();
@@ -22,6 +25,7 @@ public class AvaliarComentarioDAOJDBC implements AvaliarComentarioDAO{
         operacaoAtualizar = conexao.prepareStatement("update usuariocomentario set positiva = ?, negativa = ? where fk_codigoUsuario = ? and fk_codigoComentario = ?");
         operacaoListarPositivo = conexao.prepareStatement("select positiva, negativa from usuariocomentario where fk_codigoComentario = ? and positiva > 0");
         operacaoListarNegativo = conexao.prepareStatement("select positiva, negativa from usuariocomentario where fk_codigoComentario = ? and negativa > 0");
+        operacaoListarComentarios = conexao.prepareStatement("select fk_codigoComentario from usuariocomentario where fk_codigoUsuario = ?");
     }
 
     @Override
@@ -83,6 +87,20 @@ public class AvaliarComentarioDAOJDBC implements AvaliarComentarioDAO{
             contador++;
         }        
         return contador;
+    }
+
+    @Override
+    public List<Integer> listarComentarioUsuario(Integer codigoUsuario) throws Exception {
+        List<Integer> idComentarios = new ArrayList<>();
+        operacaoListarComentarios.clearParameters();
+        operacaoListarComentarios.setInt(1, codigoUsuario);
+        operacaoListarComentarios.execute();
+        ResultSet resultado = operacaoListarComentarios.executeQuery();
+        while (resultado.next()) {
+            Integer id = resultado.getInt("fk_codigoComentario");
+            idComentarios.add(id);
+        }        
+        return idComentarios;
     }
     
 }

@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="jspf/cabecalho.jspf" %>
     <div class="container text-center">
-        <h1> Todos os itens </h1>
+        <h1> Todos os itens comentados </h1>
         </div>
         <table class="table table-light">
             <thead>

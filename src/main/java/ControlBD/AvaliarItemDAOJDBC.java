@@ -20,8 +20,8 @@ public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
         operacaoCriar = conexao.prepareStatement("insert into usuarioitem (positiva, negativa, fk_codigoUsuario, fk_codigoItem) values (?, ?, ?, ?)");
         operacaoListar = conexao.prepareStatement("select positiva, negativa from usuarioitem where fk_codigoUsuario = ? and fk_codigoItem = ?");
         operacaoAtualizar = conexao.prepareStatement("update usuarioitem set positiva = ?, negativa = ? where fk_codigoUsuario = ? and fk_codigoItem = ?");
-        operacaoListarPositivo = conexao.prepareStatement("select positiva from usuarioitem where fk_codigoUsuario = ? and fk_codigoItem = ? and positiva > 0");
-        operacaoListarNegativo = conexao.prepareStatement("select negativa from usuarioitem where fk_codigoUsuario = ? and fk_codigoItem = ? and negativa > 0");
+        operacaoListarPositivo = conexao.prepareStatement("select positiva from usuarioitem where fk_codigoItem = ? and positiva > 0");
+        operacaoListarNegativo = conexao.prepareStatement("select negativa from usuarioitem where fk_codigoItem = ? and negativa > 0");
     }
 
     @Override
@@ -60,10 +60,9 @@ public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
     }
 
     @Override
-    public Integer listarEspecificoPositivo(Integer codigoUsuario, Integer codigoItem) throws Exception {
+    public Integer listarEspecificoPositivo(Integer codigoItem) throws Exception {
         operacaoListarPositivo.clearParameters();
-        operacaoListarPositivo.setInt(1, codigoUsuario);
-        operacaoListarPositivo.setInt(2, codigoItem);
+        operacaoListarPositivo.setInt(1, codigoItem);
         operacaoListarPositivo.execute();
         ResultSet resultado = operacaoListarPositivo.executeQuery();
         Integer contador = 0;
@@ -74,10 +73,9 @@ public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
     }
 
     @Override
-    public Integer listarEspecificoNegativo(Integer codigoUsuario, Integer codigoItem) throws Exception {
+    public Integer listarEspecificoNegativo(Integer codigoItem) throws Exception {
         operacaoListarNegativo.clearParameters();
-        operacaoListarNegativo.setInt(1, codigoUsuario);
-        operacaoListarNegativo.setInt(2, codigoItem);
+        operacaoListarNegativo.setInt(1, codigoItem);
         operacaoListarNegativo.execute();
         ResultSet resultado = operacaoListarNegativo.executeQuery();
         Integer contador = 0;

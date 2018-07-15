@@ -22,11 +22,10 @@
                                 Itens
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="ranking.html">Ranking de itens</a>
-                                <a class="dropdown-item" href="item-todos.html">Todos os itens</a>
+                                <a class="dropdown-item" href="ranking.html?ordem=default">Ranking de itens</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="item-novo.html">Criar item</a>
-                                <a class="dropdown-item" href="meus-itens.html">Meus itens</a>
+                                <a class="dropdown-item" href="item-listar.html">Meus itens</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -34,8 +33,8 @@
                                 Comentários
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="item-listar.html">Itens a serem avaliados</a>
-                                <a class="dropdown-item" href="#">Meus comentários</a>
+                                <a class="dropdown-item" href="#">Itens a serem avaliados</a>
+                                <a class="dropdown-item" href="meus-comentarios.html">Meus comentários</a>
                             </div>
                         </li>
                     </c:when>

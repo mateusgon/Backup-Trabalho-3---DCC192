@@ -159,10 +159,10 @@ public class ItemDAOJDBC implements ItemDAO {
         }
         AvaliarItemDAO aI = new AvaliarItemDAOJDBC();
         try{
-            i.setPositivo(aI.listarEspecificoPositivo(id, idItem));
+            i.setPositivo(aI.listarEspecificoPositivo(idItem));
             try
             {
-                i.setNegativo(aI.listarEspecificoNegativo(id, idItem));
+                i.setNegativo(aI.listarEspecificoNegativo(idItem));
                 return i;
             }
             catch (Exception ex)
@@ -175,7 +175,7 @@ public class ItemDAOJDBC implements ItemDAO {
         {
             try
             {
-                i.setNegativo(aI.listarEspecificoNegativo(id, idItem));
+                i.setNegativo(aI.listarEspecificoNegativo(idItem));
                 return i;
             }
             catch (Exception ex2)

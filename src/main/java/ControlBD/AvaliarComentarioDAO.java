@@ -1,6 +1,7 @@
 package ControlBD;
 
 import Funcionamento.AvaliarComentario;
+import java.util.List;
 
 public interface AvaliarComentarioDAO {
     public void criar (Integer codigoUsuario, Integer codigoComentario, Integer positivo, Integer negativo) throws Exception;
@@ -8,4 +9,5 @@ public interface AvaliarComentarioDAO {
     public void alterar (Integer codigoUsuario, Integer codigoComentario, Integer positivo, Integer negativo) throws Exception;
     public Integer listarEspecificoPositivo (Integer codigoComentario) throws Exception;
     public Integer listarEspecificoNegativo (Integer codigoComentario) throws Exception;
+    public List<Integer> listarComentarioUsuario (Integer codigoUsuario) throws Exception;
 }

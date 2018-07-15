@@ -1,10 +1,7 @@
 package Command;
 
-import ControlBD.ComentarioDAO;
-import ControlBD.ComentarioDAOJDBC;
 import ControlBD.ItemDAO;
 import ControlBD.ItemDAOJDBC;
-import Funcionamento.Comentario;
 import Funcionamento.Item;
 import java.io.IOException;
 import java.util.List;
@@ -22,31 +19,11 @@ public class GetItemListarCommand implements Comando{
         String username = (String) session.getAttribute("authUser");
         Integer id = (Integer) session.getAttribute("idUser");
         if (username != null || !username.isEmpty()) {
-            try {
-                Boolean comentarioJaFeito = false;
-                Boolean comentarioJaFeito2 = false;
-                ComentarioDAO cDAO = new ComentarioDAOJDBC();
+            try { 
                 ItemDAO iDAO = new ItemDAOJDBC();
-                Integer id2 = Integer.parseInt(request.getParameter("item"));
+                List<Item> itens = iDAO.listarItensUsuario(id);
                 Boolean logado = true;
-                Item item = new Item();
-                item = iDAO.exibirItem(id, id2);
-                List<Comentario> comentarios = cDAO.listarComentariosItem(id2);
-                for (Comentario comentario : comentarios) {
-                    if(comentario.getIdUsuario() == id)
-                    {
-                        comentarioJaFeito2 = true;
-                        break;
-                    }
-                }
-                if (item.getIdCriador() == id)
-                {
-                    comentarioJaFeito = true;
-                }
-                request.setAttribute("feito", comentarioJaFeito);
-                request.setAttribute("feito2", comentarioJaFeito2);
-                request.setAttribute("comentarios", comentarios);
-                request.setAttribute("item", item);
+                request.setAttribute("itens", itens);
                 request.setAttribute("logado", logado);
                 RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/item-listar.jsp");
                 dispacher.forward(request, response);
@@ -61,6 +38,5 @@ public class GetItemListarCommand implements Comando{
             return;
         }
     }
-
 }
     

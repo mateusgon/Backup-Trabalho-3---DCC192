@@ -3,13 +3,31 @@
 
 <div class="container" style="margin-top: 4cm" >
     <h1> Todos os itens</h1>
+    
 <div class="container" style="margin-top: 1cm" >
-
     <ul>
-        <li><a href="ranking.html?ordem=datafinal" />Ordernar por Data Recente</li></a>
-        <li><a href="ranking.html?ordem=codigo" />Ordernar por Codigo</li></a>
-        <li><a href="ranking.html?ordem=datainicial" />Ordernar por Data Antiga</li></a>
+        <li><a href="ranking.html?ordem=navaliacao" />Ordernar por número de avaliações</li></a>
+        <li><a href="ranking.html?ordem=melhoravaliacao" />Ordernar por melhor avaliação</li></a>
+        <li><a href="ranking.html?ordem=datacriacao" />Ordernar por data de criação</li></a>        
+        <li><a href="ranking.html?ordem=dataatualizacao" />Ordernar por atualização mais recente</li></a>
     </ul>
+    <table class="table table-light">
+            <thead>
+                <tr>
+                    <th scope="col">Itens</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="itens" items="${itens}">
+                    <tr>
+                        <th>
+                            <a href="item.html?item=${itens.idItem}"> ${itens.titulo} </a>
+                        </th>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    <%--
     <div class="row" style="margin-top: 1.5cm">
         <div class="col-sm-6">
             <div class="card">
@@ -101,7 +119,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div> --%>    
+</div> 
 </div>
-
 <%@include file="jspf/rodape.jspf" %>

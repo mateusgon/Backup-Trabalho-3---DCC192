@@ -19,7 +19,7 @@ public class GetMeusItensCommand implements Comando{
         String username = (String) session.getAttribute("authUser");
         Integer id = (Integer) session.getAttribute("idUser");
         if (username != null || !username.isEmpty()) {
-            try {
+            try { 
                 ItemDAO iDAO = new ItemDAOJDBC();
                 List<Item> itens = iDAO.listarItensUsuario(id);
                 Boolean logado = true;

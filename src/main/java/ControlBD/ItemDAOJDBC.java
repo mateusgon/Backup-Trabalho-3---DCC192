@@ -33,7 +33,7 @@ public class ItemDAOJDBC implements ItemDAO {
         operacaoListarAllOrdemDataInicial = conexao.prepareStatement("select * from item order by dataInicial asc");
         operacaoListarAllOrdemDataFinal = conexao.prepareStatement("select * from item order by dataInicial desc");
         operacaoListarAllOrdemCodigo = conexao.prepareStatement("select * from item order by codigoItem asc");
-        operacaoListarAll = conexao.prepareStatement("select * from item ");
+        operacaoListarAll = conexao.prepareStatement("select * from item");
         operacaoExibir = conexao.prepareStatement("select *  from item where codigoItem = ?");
         operacaoExcluir = conexao.prepareStatement("delete from item where codigoItem = ?");
         operacaoAlterar = conexao.prepareStatement("update item set titulo = ?, descricao = ?, links = ?, dataAtualizacao = ? where codigoItem = ?");
@@ -118,8 +118,8 @@ public class ItemDAOJDBC implements ItemDAO {
     @Override
     public List<Item> listarAllItens() throws Exception {
         List<Item> itens = new ArrayList<>();
-        operacaoListarAllOrdem.clearParameters();
-        ResultSet resultado = operacaoListarAllOrdem.executeQuery();
+        operacaoListarAll.clearParameters();
+        ResultSet resultado = operacaoListarAll.executeQuery();
         while (resultado.next()) {
             Item i = new Item();
             i.setIdItem(resultado.getInt("codigoItem"));

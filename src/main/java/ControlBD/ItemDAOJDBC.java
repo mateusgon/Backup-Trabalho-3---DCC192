@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class ItemDAOJDBC implements ItemDAO{
+public class ItemDAOJDBC implements ItemDAO {
 
     private Connection conexao;
     private PreparedStatement operacaoInsereItem;
@@ -21,21 +21,26 @@ public class ItemDAOJDBC implements ItemDAO{
     private PreparedStatement operacaoExcluir;
     private PreparedStatement operacaoExibir;
     private PreparedStatement operacaoAlterar;
+    private PreparedStatement operacaoListarAllOrdemDataInicial;
+    private PreparedStatement operacaoListarAllOrdemDataFinal;
+    private PreparedStatement operacaoListarAllOrdemCodigo;
 
     public ItemDAOJDBC() throws Exception {
         conexao = BdConnection.getConnection();
         operacaoInsereItem = conexao.prepareStatement("insert into item (titulo, descricao, links, dataInicial, fk_codigoCriador) values (?, ?, ?, ?, ?)");
         operacaoListar = conexao.prepareStatement("select codigoItem, titulo, descricao, links, dataInicial, dataAtualizacao "
                 + "from item where fk_codigoCriador = ?");
-        operacaoListarAllOrdem = conexao.prepareStatement("select * from item order by dataInicial asc");
+        operacaoListarAllOrdemDataInicial = conexao.prepareStatement("select * from item order by dataInicial asc");
+        operacaoListarAllOrdemDataFinal = conexao.prepareStatement("select * from item order by dataInicial desc");
+        operacaoListarAllOrdemCodigo = conexao.prepareStatement("select * from item order by codigoItem asc");
         operacaoListarAll = conexao.prepareStatement("select * from item ");
         operacaoExibir = conexao.prepareStatement("select *  from item where codigoItem = ?");
         operacaoExcluir = conexao.prepareStatement("delete from item where codigoItem = ?");
         operacaoAlterar = conexao.prepareStatement("update item set titulo = ?, descricao = ?, links = ?, dataAtualizacao = ? where codigoItem = ?");
     }
-    
+
     @Override
-    public void criar(String titulo, String desricacao, String links, Integer idUsuario) throws Exception{
+    public void criar(String titulo, String desricacao, String links, Integer idUsuario) throws Exception {
         operacaoInsereItem.clearParameters();
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         Calendar cal = Calendar.getInstance();
@@ -47,7 +52,7 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoInsereItem.setString(2, desricacao);
         operacaoInsereItem.setString(3, links);
         operacaoInsereItem.setTimestamp(4, dataSqlCriacao);
-        operacaoInsereItem.setInt(5,idUsuario);
+        operacaoInsereItem.setInt(5, idUsuario);
         operacaoInsereItem.executeUpdate();
     }
 
@@ -57,8 +62,7 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoListar.clearParameters();
         operacaoListar.setInt(1, idUsuario);
         ResultSet resultado = operacaoListar.executeQuery();
-        while (resultado.next())
-        {
+        while (resultado.next()) {
             Item i = new Item();
             i.setIdItem(resultado.getInt("codigoItem"));
             i.setTitulo(resultado.getString("titulo"));
@@ -72,13 +76,32 @@ public class ItemDAOJDBC implements ItemDAO{
     }
 
     @Override
-    public List<Item> listarAllItensOrdem(String ordem) throws Exception {
+    public List<Item> listarAllItensOrdemDataFinal() throws Exception {
         List<Item> itens = new ArrayList<>();
-        operacaoListarAllOrdem.clearParameters();
- //       operacaoListar.setString(1, ordem);
-        ResultSet resultado = operacaoListarAllOrdem.executeQuery();
-        while (resultado.next())
-        {
+        operacaoListarAllOrdemDataFinal.clearParameters();
+
+        ResultSet resultado = operacaoListarAllOrdemDataFinal.executeQuery();
+        while (resultado.next()) {
+            Item i = new Item();
+            i.setIdItem(resultado.getInt("codigoItem"));
+            i.setTitulo(resultado.getString("titulo"));
+            i.setDescricao(resultado.getString("descricao"));
+            i.setLinks(resultado.getString("links"));
+            i.setDataInicial(resultado.getTimestamp("dataInicial"));
+            i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
+            i.setIdCriador(resultado.getInt("fk_codigoCriador"));
+            itens.add(i);
+        }
+        return itens;
+    }
+
+    @Override
+    public List<Item> listarAllItensOrdemDataInicial() throws Exception {
+        List<Item> itens = new ArrayList<>();
+        operacaoListarAllOrdemDataInicial.clearParameters();
+
+        ResultSet resultado = operacaoListarAllOrdemDataInicial.executeQuery();
+        while (resultado.next()) {
             Item i = new Item();
             i.setIdItem(resultado.getInt("codigoItem"));
             i.setTitulo(resultado.getString("titulo"));
@@ -97,8 +120,7 @@ public class ItemDAOJDBC implements ItemDAO{
         List<Item> itens = new ArrayList<>();
         operacaoListarAllOrdem.clearParameters();
         ResultSet resultado = operacaoListarAllOrdem.executeQuery();
-        while (resultado.next())
-        {
+        while (resultado.next()) {
             Item i = new Item();
             i.setIdItem(resultado.getInt("codigoItem"));
             i.setTitulo(resultado.getString("titulo"));
@@ -111,7 +133,7 @@ public class ItemDAOJDBC implements ItemDAO{
         }
         return itens;
     }
- 
+
     @Override
     public void excluirItem(Integer idItem) throws Exception {
         operacaoExcluir.clearParameters();
@@ -126,8 +148,7 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoExibir.execute();
         ResultSet resultado = operacaoExibir.executeQuery();
         Item i = new Item();
-        while (resultado.next())
-        {
+        while (resultado.next()) {
             i.setIdItem(resultado.getInt("codigoItem"));
             i.setTitulo(resultado.getString("titulo"));
             i.setDescricao(resultado.getString("descricao"));
@@ -140,7 +161,7 @@ public class ItemDAOJDBC implements ItemDAO{
     }
 
     @Override
-    public void alterar(Integer id, String titulo, String descricao, String links) throws Exception{
+    public void alterar(Integer id, String titulo, String descricao, String links) throws Exception {
         operacaoAlterar.clearParameters();
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         Calendar cal = Calendar.getInstance();
@@ -155,5 +176,24 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoAlterar.setInt(5, id);
         operacaoAlterar.executeUpdate();
     }
-    
+
+    @Override
+    public List<Item> listarAllItensOrdemCodigo() throws Exception {
+        List<Item> itens = new ArrayList<>();
+        operacaoListarAllOrdemCodigo.clearParameters();
+        ResultSet resultado = operacaoListarAllOrdemCodigo.executeQuery();
+        while (resultado.next()) {
+            Item i = new Item();
+            i.setIdItem(resultado.getInt("codigoItem"));
+            i.setTitulo(resultado.getString("titulo"));
+            i.setDescricao(resultado.getString("descricao"));
+            i.setLinks(resultado.getString("links"));
+            i.setDataInicial(resultado.getTimestamp("dataInicial"));
+            i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
+            i.setIdCriador(resultado.getInt("fk_codigoCriador"));
+            itens.add(i);
+        }
+        return itens;
+    }
+
 }

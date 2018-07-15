@@ -6,9 +6,9 @@
 <div class="container" style="margin-top: 1cm" >
 
     <ul>
-        <li><a href="#" />Ordernar por Data Recente</li></a>
-        <li><a href="#" />Ordernar por Popularidade</li></a>
-        <li><a href="#" />Ordernar por Data Antiga</li></a>
+        <li><a href="ranking.html?ordem=datafinal" />Ordernar por Data Recente</li></a>
+        <li><a href="ranking.html?ordem=codigo" />Ordernar por Codigo</li></a>
+        <li><a href="ranking.html?ordem=datainicial" />Ordernar por Data Antiga</li></a>
     </ul>
     <div class="row" style="margin-top: 1.5cm">
         <div class="col-sm-6">

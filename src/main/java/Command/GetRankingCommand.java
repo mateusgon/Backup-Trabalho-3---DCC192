@@ -13,35 +13,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class GetRankingCommand implements Comando{
+public class GetRankingCommand implements Comando {
 
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("authUser");
-        String ordenacao ;
+        String ordenacao;
         ItemDAO iDAO = null;
         try {
             iDAO = new ItemDAOJDBC();
         } catch (Exception ex) {
             Logger.getLogger(GetRankingCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
-        List<Item> itens ;
+        List<Item> itens;
         Integer id = (Integer) session.getAttribute("idUser");
-        if(request.getParameter("ordem") == null){
-             ordenacao = "Default";
-        }
-        else{ 
-            ordenacao = request.getParameter("codigoItem");
+        if (request.getParameter("ordem") == null) {
+            ordenacao = "Default";
+        } else {
+            ordenacao = request.getParameter("ordem");
         }
         if (username != null || !username.isEmpty()) {
             try {
-                if(ordenacao=="Default"){
-                    itens = iDAO.listarAllItensOrdem("codigoItem");
-                
-                }else{
-                    itens = iDAO.listarAllItensOrdem(ordenacao);
-                    }
+                //AJUSTAR CONFORME ORDENACAO
+                if ("Default".equals(ordenacao)) {
+                    itens = iDAO.listarAllItensOrdemCodigo();
+                } else if ("datafinal".equals(ordenacao)) {
+                    itens = iDAO.listarAllItensOrdemDataFinal();
+                } else if ("datainicial".equals(ordenacao)) {
+                    itens = iDAO.listarAllItensOrdemDataInicial();
+                } else {
+                    itens = iDAO.listarAllItensOrdemCodigo();
+                }
                 Boolean logado = true;
                 request.setAttribute("itens", itens);
                 request.setAttribute("logado", logado);
@@ -51,13 +54,9 @@ public class GetRankingCommand implements Comando{
             } catch (Exception ex) {
 
             }
-        }
-        else
-        {
+        } else {
             response.sendRedirect("index.html");
             return;
         }
-        }
     }
-    
-
+}

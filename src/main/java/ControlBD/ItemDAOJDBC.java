@@ -111,6 +111,7 @@ public class ItemDAOJDBC implements ItemDAO{
             i.setLinks(resultado.getString("links"));
             i.setDataInicial(resultado.getTimestamp("dataInicial"));
             i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
+            i.setIdCriador(resultado.getInt("fk_codigoCriador"));
         }
         return i;
     }

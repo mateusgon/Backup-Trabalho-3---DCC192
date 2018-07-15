@@ -16,7 +16,7 @@ public class ItemDAOJDBC implements ItemDAO{
     private Connection conexao;
     private PreparedStatement operacaoInsereItem;
     private PreparedStatement operacaoListar;
-    private PreparedStatement operacaoListarAll;
+    private PreparedStatement operacaoListarAllOrdem;
     private PreparedStatement operacaoExcluir;
     private PreparedStatement operacaoExibir;
     private PreparedStatement operacaoAlterar;
@@ -26,7 +26,7 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoInsereItem = conexao.prepareStatement("insert into item (titulo, descricao, links, dataInicial, fk_codigoCriador) values (?, ?, ?, ?, ?)");
         operacaoListar = conexao.prepareStatement("select codigoItem, titulo, descricao, links, dataInicial, dataAtualizacao "
                 + "from item where fk_codigoCriador = ?");
-        operacaoListarAll = conexao.prepareStatement("select * from item");
+        operacaoListarAllOrdem = conexao.prepareStatement("select * from item order by ? asc");
         operacaoExibir = conexao.prepareStatement("select *  from item where codigoItem = ?");
         operacaoExcluir = conexao.prepareStatement("delete from item where codigoItem = ?");
         operacaoAlterar = conexao.prepareStatement("update item set titulo = ?, descricao = ?, links = ?, dataAtualizacao = ? where codigoItem = ?");
@@ -70,10 +70,11 @@ public class ItemDAOJDBC implements ItemDAO{
     }
 
     @Override
-    public List<Item> listarAllItens() throws Exception {
+    public List<Item> listarAllItensOrdem(String ordem) throws Exception {
         List<Item> itens = new ArrayList<>();
-        operacaoListarAll.clearParameters();
-        ResultSet resultado = operacaoListarAll.executeQuery();
+        operacaoListarAllOrdem.clearParameters();
+        operacaoListar.setString(1, ordem);
+        ResultSet resultado = operacaoListarAllOrdem.executeQuery();
         while (resultado.next())
         {
             Item i = new Item();

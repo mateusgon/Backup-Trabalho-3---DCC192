@@ -17,6 +17,7 @@ public class ItemDAOJDBC implements ItemDAO{
     private PreparedStatement operacaoInsereItem;
     private PreparedStatement operacaoListar;
     private PreparedStatement operacaoListarAllOrdem;
+    private PreparedStatement operacaoListarAll;
     private PreparedStatement operacaoExcluir;
     private PreparedStatement operacaoExibir;
     private PreparedStatement operacaoAlterar;
@@ -27,6 +28,7 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoListar = conexao.prepareStatement("select codigoItem, titulo, descricao, links, dataInicial, dataAtualizacao "
                 + "from item where fk_codigoCriador = ?");
         operacaoListarAllOrdem = conexao.prepareStatement("select * from item order by ? asc");
+        operacaoListarAll = conexao.prepareStatement("select * from item ");
         operacaoExibir = conexao.prepareStatement("select *  from item where codigoItem = ?");
         operacaoExcluir = conexao.prepareStatement("delete from item where codigoItem = ?");
         operacaoAlterar = conexao.prepareStatement("update item set titulo = ?, descricao = ?, links = ?, dataAtualizacao = ? where codigoItem = ?");
@@ -89,7 +91,25 @@ public class ItemDAOJDBC implements ItemDAO{
         return itens;
     }
 
-    
+    @Override
+    public List<Item> listarAllItens() throws Exception {
+        List<Item> itens = new ArrayList<>();
+        operacaoListarAllOrdem.clearParameters();
+        ResultSet resultado = operacaoListarAllOrdem.executeQuery();
+        while (resultado.next())
+        {
+            Item i = new Item();
+            i.setIdItem(resultado.getInt("codigoItem"));
+            i.setTitulo(resultado.getString("titulo"));
+            i.setDescricao(resultado.getString("descricao"));
+            i.setLinks(resultado.getString("links"));
+            i.setDataInicial(resultado.getTimestamp("dataInicial"));
+            i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
+            itens.add(i);
+        }
+        return itens;
+    }
+ 
     @Override
     public void excluirItem(Integer idItem) throws Exception {
         operacaoExcluir.clearParameters();

@@ -25,9 +25,6 @@ public class GetItemTodosCommand implements Comando{
                 Boolean logado = true;
                 request.setAttribute("itens", itens);
                 request.setAttribute("logado", logado);
-                for (Item iten : itens) {
-                    System.out.println(iten.getTitulo());
-                }
                 RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/item-todos.jsp");
                 dispacher.forward(request, response);
                 return;

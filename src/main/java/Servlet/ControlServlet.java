@@ -46,6 +46,7 @@ public class ControlServlet extends HttpServlet {
        rotas.put("/usuario-novo.html", "Command.PostCadastroCommand");
        rotas.put("/item-novo.html", "Command.PostItemNovoCommand");
        rotas.put("/item-editar.html", "Command.PostItemAlterarCommand");
+       rotas.put("/comentar.html", "Command.PostComentarCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();

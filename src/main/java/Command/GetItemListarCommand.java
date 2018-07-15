@@ -25,14 +25,6 @@ public class GetItemListarCommand implements Comando{
                 Boolean logado = true;
                 Item item = new Item();
                 item = iDAO.exibirItem(id2);
-                if (id2 == item.getIdItem())
-                {
-                    request.setAttribute("donoItem", true);
-                }
-                else
-                {
-                    request.setAttribute("donoItem", false);
-                }
                 request.setAttribute("item", item);
                 request.setAttribute("logado", logado);
                 RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/item-listar.jsp");

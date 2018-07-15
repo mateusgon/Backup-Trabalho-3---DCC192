@@ -1,7 +1,10 @@
 package Command;
 
+import ControlBD.ComentarioDAO;
+import ControlBD.ComentarioDAOJDBC;
 import ControlBD.ItemDAO;
 import ControlBD.ItemDAOJDBC;
+import Funcionamento.Comentario;
 import Funcionamento.Item;
 import java.io.IOException;
 import java.util.List;
@@ -20,11 +23,27 @@ public class GetItemListarCommand implements Comando{
         Integer id = (Integer) session.getAttribute("idUser");
         if (username != null || !username.isEmpty()) {
             try {
+                Boolean comentarioJaFeito = false;
+                ComentarioDAO cDAO = new ComentarioDAOJDBC();
                 ItemDAO iDAO = new ItemDAOJDBC();
                 Integer id2 = Integer.parseInt(request.getParameter("item"));
                 Boolean logado = true;
                 Item item = new Item();
                 item = iDAO.exibirItem(id2);
+                List<Comentario> comentarios = cDAO.listarComentariosItem(id2);
+                for (Comentario comentario : comentarios) {
+                    if(comentario.getIdUsuario() == id)
+                    {
+                        comentarioJaFeito = true;
+                        break;
+                    }
+                }
+                if (item.getIdCriador() == id)
+                {
+                    comentarioJaFeito = true;
+                }
+                request.setAttribute("feito", comentarioJaFeito);
+                request.setAttribute("comentarios", comentarios);
                 request.setAttribute("item", item);
                 request.setAttribute("logado", logado);
                 RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/item-listar.jsp");

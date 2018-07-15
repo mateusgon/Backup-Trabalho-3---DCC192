@@ -6,8 +6,6 @@ import ControlBD.ComentarioDAO;
 import ControlBD.ComentarioDAOJDBC;
 import ControlBD.ItemDAO;
 import ControlBD.ItemDAOJDBC;
-import Funcionamento.AvaliarComentario;
-import Funcionamento.Comentario;
 import Funcionamento.Item;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,10 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class GetMeusComentariosCommand implements Comando{
+public class GetAAvaliarCommand implements Comando{
 
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("authUser");
         Integer id = (Integer) session.getAttribute("idUser");
@@ -38,10 +37,25 @@ public class GetMeusComentariosCommand implements Comando{
                     item = iDAO.exibirItem(id, idIten);
                     itens.add(item);
                 }
+                List<Item> itens3 = new ArrayList<>();
+                List<Item> itens2 = iDAO.listarAllItens();
+                for (Item item : itens2) {
+                    Boolean aComentar = true;
+                    for (Item iten : itens) {
+                        if (item.getIdItem() == iten.getIdItem())
+                        {
+                            aComentar = false;
+                        }
+                    }
+                    if(aComentar)
+                    {
+                        itens3.add(item);
+                    }
+                }
                 Boolean logado = true;
-                request.setAttribute("itens", itens);
+                request.setAttribute("itens", itens3);
                 request.setAttribute("logado", logado);
-                RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/meus-comentarios.jsp");
+                RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/a-avaliar.jsp");
                 dispacher.forward(request, response);
                 return;
             } catch (Exception ex) {

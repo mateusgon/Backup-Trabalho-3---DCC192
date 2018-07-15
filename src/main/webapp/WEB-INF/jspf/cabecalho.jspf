@@ -33,17 +33,17 @@
                                 Comentários
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Itens a serem avaliados</a>
+                                <a class="dropdown-item" href="a-avaliar.html">Itens a serem avaliados</a>
                                 <a class="dropdown-item" href="meus-comentarios.html">Meus comentários</a>
                             </div>
                         </li>
                     </c:when>
                 </c:choose>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Curadores</a>
+                    <a class="nav-link" href="curadores.html">Curadores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Trolls</a>
+                    <a class="nav-link" href="trolls.html">Trolls</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

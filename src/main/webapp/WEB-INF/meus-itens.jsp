@@ -2,10 +2,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="jspf/cabecalho.jspf" %>
     <div class="container text-center">
-        <h1> Meus itens </h1>
+        <h1  style="margin-top:2rem"> Meus itens </h1>
         </div>
-        <table class="table table-light">
-            <thead>
+        
+    <div class="container text-center">
+  <!-- Table -->
+  <table class="table" style="margin-top:2rem">
+        <thead style="background-color: black;color: white">
                 <tr>
                     <th scope="col">Título</th>
                     <th scope="col">Ações</th>
@@ -23,4 +26,5 @@
                     </tr>
             </tbody>
         </table>
+</div>
 <%@include file="jspf/rodape.jspf" %>

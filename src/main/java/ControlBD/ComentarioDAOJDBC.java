@@ -17,11 +17,17 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
     private Connection conexao;
     private PreparedStatement operacaoCriar;
     private PreparedStatement operacaoListar;
+    private PreparedStatement operacaoListarEspecifico;
+    private PreparedStatement operacaoExcluir;
+    private PreparedStatement operacaoExcluir2;
     
     public ComentarioDAOJDBC() throws Exception{
         conexao = BdConnection.getConnection();
         operacaoCriar = conexao.prepareStatement("insert into comentario (comentario, dataInicial, fk_codigoCriador, fk_codigoItem) values (?, ?, ?, ?)");
         operacaoListar = conexao.prepareStatement("select codigoComentario, comentario, dataInicial, dataAtualizacao, fk_codigoCriador, fk_codigoItem from comentario where fk_codigoItem = ?");
+        operacaoExcluir = conexao.prepareStatement("delete from comentario where fk_codigoItem = ?");
+        operacaoExcluir2 = conexao.prepareStatement("delete from comentario where codigoComentario = ?");
+        operacaoListarEspecifico = conexao.prepareStatement("select codigoComentario, comentario from comentario where codigoComentario = ?");
     }
 
     @Override
@@ -58,6 +64,32 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
             comentarios.add(c);
         }
         return comentarios;
+    }
+
+    @Override
+    public void excluir(Integer idItem) throws Exception {
+        operacaoExcluir.clearParameters();
+        operacaoExcluir.setInt(1, idItem);
+        operacaoExcluir.execute();
+    }
+
+    @Override
+    public void excluir2(Integer idComentario) throws Exception {
+        operacaoExcluir2.clearParameters();
+        operacaoExcluir2.setInt(1, idComentario);
+        operacaoExcluir.execute();
+    }
+
+    @Override
+    public Comentario listarEspecifico(Integer idComentario) throws Exception {
+        operacaoListarEspecifico.clearParameters();
+        operacaoListarEspecifico.setInt(1, idComentario);
+        ResultSet resultado = operacaoListarEspecifico.executeQuery();
+        resultado.next();
+        Comentario c = new Comentario();
+        c.setId(resultado.getInt("codigoComentario"));
+        c.setComentario(resultado.getString("comentario"));
+        return c;
     }
     
 }

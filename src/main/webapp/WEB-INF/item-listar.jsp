@@ -37,15 +37,15 @@
             <c:forEach var="comentarios" items="${comentarios}">
                 <tr>
                     <th>
-                        <p> Criação: ${comentarios.criacao} e Atualização: ${comentarios.atualizacao} </p>
-                        ${comentarios.comentario}
+                        <p> Criação: ${comentarios.criacao} e Atualização: ${comentarios.atualizacao}
                         <c:choose>
-                            <c:when test="${feito}">
-                                <a href="item-editar.html?item=${item.idItem}"> <i class="material-icons">mode_edit</i> </a>
-                                <a href="item-excluir.html?item=${item.idItem}"> <i class="material-icons">delete</i> </a>
+                            <c:when test="${comentarios.idUsuario == idUser}">
+                                <a href="comentario-editar.html?comentario=${comentarios.id}&item=${item.idItem}"> <i class="material-icons">mode_edit</i> </a>
+                                <a href="comentario-excluir.html?comentario=${comentarios.id}&item=${item.idItem}"> <i class="material-icons">delete</i> </a>
                             </c:when>    
                         </c:choose>
-
+                        </p>
+                        ${comentarios.comentario}
                     </th>
                 </tr>
             </c:forEach>

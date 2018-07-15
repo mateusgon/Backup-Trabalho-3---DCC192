@@ -13,32 +13,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class GetItemExcluirCommand implements Comando {
+public class GetComentarioExcluirCommand implements Comando{
 
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("authUser");
         Integer id = (Integer) session.getAttribute("idUser");
         if (username != null || !username.isEmpty()) {
             try {
-                Integer id2 = Integer.parseInt(request.getParameter("item"));
-                ItemDAO iDAO = new ItemDAOJDBC();
+                Integer idItem = Integer.parseInt(request.getParameter("item"));
+                Integer idComentario = Integer.parseInt(request.getParameter("comentario"));
                 ComentarioDAO cDAO = new ComentarioDAOJDBC();
-                cDAO.excluir(id2);
-                iDAO.excluirItem(id2);
-                List<Item> itens = iDAO.listarItensUsuario(id);
-                Boolean logado = true;
-                request.setAttribute("itens", itens);
-                request.setAttribute("logado", logado);
-                RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/meus-itens.jsp");
-                dispacher.forward(request, response);
+                cDAO.excluir2(idComentario);
+                response.sendRedirect("item-listar.html?item="+idItem);
                 return;
             } catch (Exception ex) {
 
             }
 
         }
-
     }
+    
 }

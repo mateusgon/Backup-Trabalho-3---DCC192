@@ -23,3 +23,14 @@ create table item (
     fk_codigoCriador integer not null,
     foreign key (fk_codigoCriador) references usuario (codigoUsuario)
 );
+
+create table comentario (
+    codigoComentario integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    comentario varchar (1000) not null,
+    dataInicial timestamp not null,
+    dataAtualizacao timestamp,
+    fk_codigoCriador integer not null,
+    fk_codigoItem integer not null,
+    foreign key (fk_codigoCriador) references usuario (codigoUsuario),
+    foreign key (fk_codigoItem) references item (codigoItem)
+);

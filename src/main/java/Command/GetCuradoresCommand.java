@@ -24,10 +24,8 @@ public class GetCuradoresCommand implements Comando {
 
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("authUser");
-        Integer id = (Integer) session.getAttribute("idUser");
-        String ordem = request.getParameter("ordem");
+        String username = "Qualquer";
+        Integer id = null;
         if (username != null || !username.isEmpty()) {
             {
                 try {

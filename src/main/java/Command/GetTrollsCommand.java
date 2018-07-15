@@ -21,10 +21,8 @@ import javax.servlet.http.HttpSession;
 public class GetTrollsCommand implements Comando{
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("comando");
-        HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("authUser");
-        Integer id = (Integer) session.getAttribute("idUser");
+        String username = "Qualquer";
+        Integer id = null;
         if (username != null || !username.isEmpty()) {
             {
                 try {

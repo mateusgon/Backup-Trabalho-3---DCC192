@@ -27,7 +27,7 @@ public class ItemDAOJDBC implements ItemDAO{
         operacaoInsereItem = conexao.prepareStatement("insert into item (titulo, descricao, links, dataInicial, fk_codigoCriador) values (?, ?, ?, ?, ?)");
         operacaoListar = conexao.prepareStatement("select codigoItem, titulo, descricao, links, dataInicial, dataAtualizacao "
                 + "from item where fk_codigoCriador = ?");
-        operacaoListarAllOrdem = conexao.prepareStatement("select * from item order by ? asc");
+        operacaoListarAllOrdem = conexao.prepareStatement("select * from item order by dataInicial asc");
         operacaoListarAll = conexao.prepareStatement("select * from item ");
         operacaoExibir = conexao.prepareStatement("select *  from item where codigoItem = ?");
         operacaoExcluir = conexao.prepareStatement("delete from item where codigoItem = ?");
@@ -75,7 +75,7 @@ public class ItemDAOJDBC implements ItemDAO{
     public List<Item> listarAllItensOrdem(String ordem) throws Exception {
         List<Item> itens = new ArrayList<>();
         operacaoListarAllOrdem.clearParameters();
-        operacaoListar.setString(1, ordem);
+ //       operacaoListar.setString(1, ordem);
         ResultSet resultado = operacaoListarAllOrdem.executeQuery();
         while (resultado.next())
         {
@@ -86,6 +86,7 @@ public class ItemDAOJDBC implements ItemDAO{
             i.setLinks(resultado.getString("links"));
             i.setDataInicial(resultado.getTimestamp("dataInicial"));
             i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
+            i.setIdCriador(resultado.getInt("fk_codigoCriador"));
             itens.add(i);
         }
         return itens;
@@ -105,6 +106,7 @@ public class ItemDAOJDBC implements ItemDAO{
             i.setLinks(resultado.getString("links"));
             i.setDataInicial(resultado.getTimestamp("dataInicial"));
             i.setDataAtualizacao(resultado.getTimestamp("dataAtualizacao"));
+            i.setIdCriador(resultado.getInt("fk_codigoCriador"));
             itens.add(i);
         }
         return itens;

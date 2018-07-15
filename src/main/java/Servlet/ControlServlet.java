@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControlServlet", urlPatterns = {"/item-editar.html","/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html", "/meus-itens.html", "/item-excluir.html", "/item-listar.html", "/item-editar.html", "/ranking.html"})
+@WebServlet(name = "ControlServlet", urlPatterns = {"/item-editar.html","/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html", "/meus-itens.html", "/item-excluir.html", "/item-listar.html", "/item-editar.html", "/ranking.html", "/item-todos.html", "/comentar.html"})
 public class ControlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,6 +28,8 @@ public class ControlServlet extends HttpServlet {
        rotas.put("/item-editar.html", "Command.GetItemEditarCommand");
        rotas.put("/item-excluir.html", "Command.GetItemExcluirCommand");
        rotas.put("/ranking.html", "Command.GetRankingCommand");
+       rotas.put("/item-todos.html", "Command.GetItemTodosCommand");
+       rotas.put("/comentar.html", "Command.GetComentarCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();

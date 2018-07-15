@@ -23,6 +23,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="ranking.html">Ranking de itens</a>
+                                <a class="dropdown-item" href="item-todos.html">Todos os itens</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="item-novo.html">Criar item</a>
                                 <a class="dropdown-item" href="meus-itens.html">Meus itens</a>

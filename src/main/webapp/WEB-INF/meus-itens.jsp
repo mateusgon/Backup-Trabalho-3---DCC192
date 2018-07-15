@@ -12,15 +12,15 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="itens" items="${itens}">
                     <tr>
+                        <c:forEach var="itens" items="${itens}">
                         <th> <a href="item-listar.html?item=${itens.idItem}"> ${itens.titulo} </a> </th>
                     <th> 
                         <a href="item-editar.html?item=${itens.idItem}"> <i class="material-icons">mode_edit</i> </a>
                         <a href="item-excluir.html?item=${itens.idItem}"> <i class="material-icons">delete</i> </a>
                     </th>
+                        </c:forEach>
                     </tr>
-                </c:forEach>
             </tbody>
         </table>
 <%@include file="jspf/rodape.jspf" %>

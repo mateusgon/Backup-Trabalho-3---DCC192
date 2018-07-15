@@ -12,13 +12,13 @@
                         <th>
                             <p> Criação: ${item.dataInicial} e Atualização: ${item.dataAtualizacao}
                             <c:choose>
-                                <c:when test="${item.idItem != idUser}">
+                                <c:when test="${item.idCriador == idUser}">
                                     <a href="item-editar.html?item=${item.idItem}"> <i class="material-icons">mode_edit</i> </a>
                                     <a href="item-excluir.html?item=${item.idItem}"> <i class="material-icons">delete</i> </a>
                                 </c:when>    
                             </c:choose>
                             <c:choose>
-                                <c:when test="${item.idItem == idUser}">
+                                <c:when test="${item.idCriador != idUser}">
                                     <a href=""> <i class="material-icons" font-size = "1rem" >thumb_up</i> </a>
                                     <a href=""> <i class="material-icons" font-size = "1rem" >thumb_down</i> </a> 
                                 </c:when>    
@@ -27,11 +27,7 @@
                             <p> Item nome: ${item.titulo} </p>
                             <p> Item descricao: ${item.descricao} </p>
                             <p> Item url: ${item.links} </p>
-                            <c:choose>
-                                <c:when test="${item.idItem == idUser}">
-                                    <a href="#" class="btn btn-primary">COMENTAR</a>
-                                </c:when>    
-                            </c:choose>
+                            <a href="comentar.html?item=${item.idItem}" class="btn btn-primary">Comentar</a>
                         </th>
                     </tr>
             </tbody>

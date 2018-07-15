@@ -9,4 +9,5 @@ public interface ComentarioDAO {
     public Comentario listarEspecifico(Integer idComentario) throws Exception;
     public void excluir(Integer idItem) throws Exception;
     public void excluir2(Integer idComentario) throws Exception;
+    public void alterar(Integer idComentario, String comentario) throws Exception;
 }

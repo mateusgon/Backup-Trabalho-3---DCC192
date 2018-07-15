@@ -24,6 +24,7 @@ public class GetItemListarCommand implements Comando{
         if (username != null || !username.isEmpty()) {
             try {
                 Boolean comentarioJaFeito = false;
+                Boolean comentarioJaFeito2 = false;
                 ComentarioDAO cDAO = new ComentarioDAOJDBC();
                 ItemDAO iDAO = new ItemDAOJDBC();
                 Integer id2 = Integer.parseInt(request.getParameter("item"));
@@ -34,7 +35,7 @@ public class GetItemListarCommand implements Comando{
                 for (Comentario comentario : comentarios) {
                     if(comentario.getIdUsuario() == id)
                     {
-                        comentarioJaFeito = true;
+                        comentarioJaFeito2 = true;
                         break;
                     }
                 }
@@ -43,6 +44,7 @@ public class GetItemListarCommand implements Comando{
                     comentarioJaFeito = true;
                 }
                 request.setAttribute("feito", comentarioJaFeito);
+                request.setAttribute("feito2", comentarioJaFeito2);
                 request.setAttribute("comentarios", comentarios);
                 request.setAttribute("item", item);
                 request.setAttribute("logado", logado);

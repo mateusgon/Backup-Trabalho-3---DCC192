@@ -27,9 +27,10 @@ public class GetComentarioEditarCommand implements Comando{
                 Boolean logado = true;
                 ComentarioDAO cDAO = new ComentarioDAOJDBC();
                 Comentario comentario = cDAO.listarEspecifico(idComentario);
+                request.setAttribute("idItem", idItem);
                 request.setAttribute("comentario", comentario);
                 request.setAttribute("logado", logado);
-                RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/comentario-alterar.jsp");
+                RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/comentar-alterar.jsp");
                 dispacher.forward(request, response);
                 return;
             } catch (Exception ex) {

@@ -20,6 +20,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
     private PreparedStatement operacaoListarEspecifico;
     private PreparedStatement operacaoExcluir;
     private PreparedStatement operacaoExcluir2;
+    private PreparedStatement operacaoAlterar;
     
     public ComentarioDAOJDBC() throws Exception{
         conexao = BdConnection.getConnection();
@@ -28,6 +29,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
         operacaoExcluir = conexao.prepareStatement("delete from comentario where fk_codigoItem = ?");
         operacaoExcluir2 = conexao.prepareStatement("delete from comentario where codigoComentario = ?");
         operacaoListarEspecifico = conexao.prepareStatement("select codigoComentario, comentario from comentario where codigoComentario = ?");
+        operacaoAlterar = conexao.prepareStatement("update comentario set comentario = ?, dataAtualizacao = ? where codigoComentario = ?");
     }
 
     @Override
@@ -77,7 +79,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
     public void excluir2(Integer idComentario) throws Exception {
         operacaoExcluir2.clearParameters();
         operacaoExcluir2.setInt(1, idComentario);
-        operacaoExcluir.execute();
+        operacaoExcluir2.execute();
     }
 
     @Override
@@ -90,6 +92,21 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
         c.setId(resultado.getInt("codigoComentario"));
         c.setComentario(resultado.getString("comentario"));
         return c;
+    }
+
+    @Override
+    public void alterar(Integer idComentario, String comentario) throws Exception {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+        Calendar cal = Calendar.getInstance();
+        Date data = new Date();
+        cal.setTime(data);
+        java.sql.Timestamp dataSqlAtualizacao;
+        dataSqlAtualizacao = new java.sql.Timestamp(data.getTime());
+        operacaoAlterar.clearParameters();
+        operacaoAlterar.setString(1, comentario);
+        operacaoAlterar.setTimestamp(2, dataSqlAtualizacao);
+        operacaoAlterar.setInt(3, idComentario);
+        operacaoAlterar.executeUpdate();
     }
     
 }

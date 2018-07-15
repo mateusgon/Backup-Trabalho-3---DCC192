@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControlServlet", urlPatterns = {"/ranking-ordem.html","/item-editar.html","/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html", "/meus-itens.html", "/item-excluir.html", "/item-listar.html", "/item-editar.html", "/ranking.html", "/item-todos.html", "/comentar.html"})
+@WebServlet(name = "ControlServlet", urlPatterns = {"/ranking-ordem.html","/item-editar.html","/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html", "/meus-itens.html", "/item-excluir.html", "/item-listar.html", "/item-editar.html", "/ranking.html", "/item-todos.html", "/comentar.html", "/comentario-editar.html", "/comentario-excluir.html", "/avaliar.html"})
 public class ControlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,6 +30,9 @@ public class ControlServlet extends HttpServlet {
        rotas.put("/ranking.html", "Command.GetRankingCommand");
        rotas.put("/item-todos.html", "Command.GetItemTodosCommand");
        rotas.put("/comentar.html", "Command.GetComentarCommand");
+       rotas.put("/comentario-editar.html", "Command.GetComentarioEditarCommand");
+       rotas.put("/comentario-excluir.html", "Command.GetComentarioExcluirCommand");
+       rotas.put("/avaliar.html", "Command.GetAvaliarCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();
@@ -47,6 +50,7 @@ public class ControlServlet extends HttpServlet {
        rotas.put("/item-novo.html", "Command.PostItemNovoCommand");
        rotas.put("/item-editar.html", "Command.PostItemAlterarCommand");
        rotas.put("/comentar.html", "Command.PostComentarCommand");
+       rotas.put("/comentario-editar.html", "Command.PostComentarioEditarCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();

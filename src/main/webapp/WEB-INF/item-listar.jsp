@@ -28,8 +28,12 @@
                     <p> Item descricao: ${item.descricao} </p>
                     <p> Item url: ${item.links} </p>
                     <c:choose>
-                        <c:when test="${feito}">
-                            <a href="comentar.html?item=${item.idItem}" class="btn btn-primary">Comentar</a>
+                        <c:when test="${!feito}">
+                            <c:choose>
+                            <c:when test="${!feito2}">
+                                <a href="comentar.html?item=${item.idItem}" class="btn btn-primary">Comentar</a>
+                            </c:when>    
+                            </c:choose>    
                         </c:when>    
                     </c:choose>        
                 </th>

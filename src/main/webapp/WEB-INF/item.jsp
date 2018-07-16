@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="jspf/cabecalho.jspf" %>
 <div class="container text-center">
     <table class="table" style="margin-top:2rem">
@@ -11,7 +12,12 @@
             <tr>
                 <th>
                     <div class="container text-left">
-                        <p> Criação: ${item.dataInicial} e Atualização: ${item.dataAtualizacao}
+                        <p> <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${item.dataInicial}" />  
+                            <c:choose>
+                                <c:when test="${item.dataAtualizacao != null}">
+                                    e Atualização: <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${item.dataAtualizacao}" />
+                                </c:when>
+                            </c:choose>
                             <c:choose>
                                 <c:when test="${item.idCriador == idUser}">
                                     <a href="item-editar.html?item=${item.idItem}"> <i class="material-icons">mode_edit</i> </a>
@@ -31,7 +37,7 @@
                         </p>
                         <p> Item nome: ${item.titulo} </p>
                         <p> Item descricao: ${item.descricao} </p>
-                        <p> Item url: ${item.links} </p>
+                        <p> Item url: <a href="${item.links}"> ${item.links} </a> </p>
                         <c:choose>
                             <c:when test="${!feito}">
                                 <c:choose>
@@ -47,8 +53,14 @@
             <div class="container text-rigth">
                 <th>
                 <th>
-                    <p style="margin-left:-70px"> Criação: ${comentarios.criacao} e Atualização: ${comentarios.atualizacao}
-                        <c:choose>
+                    <p style="margin-left:-70px"> 
+                        Criação: <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${comentarios.criacao}" />     
+                            <c:choose>
+                                <c:when test="${comentarios.atualizacao != null}">
+                                    e Atualização: ${comentarios.dataAtualizacao}
+                                </c:when>
+                            </c:choose>
+                            <c:choose>        
                             <c:when test="${comentarios.idUsuario == idUser}">
                                 <a href="comentario-editar.html?comentario=${comentarios.id}&item=${item.idItem}"> <i class="material-icons">mode_edit</i> </a>
                                 <a href="comentario-excluir.html?comentario=${comentarios.id}&item=${item.idItem}"> <i class="material-icons">delete</i> </a>

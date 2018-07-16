@@ -42,7 +42,6 @@ public class GetAAvaliarCommand implements Comando{
                     item = iDAO.exibirItem(id, idIten);
                     itens.add(item);
                 }
-                System.out.println(idItensComentarios.size());
                 List<Item> itens3 = new ArrayList<>();
                 List<Item> itens2 = iDAO.listarAllItens();
                 for (Item item : itens2) {

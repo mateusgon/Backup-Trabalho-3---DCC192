@@ -24,8 +24,9 @@ public class GetCuradoresCommand implements Comando {
 
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String username = "Qualquer";
-        Integer id = null;
+        Integer id = (Integer) session.getAttribute("idUser");
         if (username != null || !username.isEmpty()) {
             {
                 try {
@@ -61,6 +62,14 @@ public class GetCuradoresCommand implements Comando {
                         }
                     });
                     Boolean logado = true;
+                    if (id != null)
+                    {
+                        logado = true;
+                    }
+                    else
+                    {
+                        logado = false;
+                    }
                     request.setAttribute("usuarios", usuario);
                     request.setAttribute("logado", logado);
                     RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/curadores.jsp");

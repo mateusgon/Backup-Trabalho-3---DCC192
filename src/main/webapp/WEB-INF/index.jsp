@@ -5,7 +5,8 @@
     </div>
     
         <div class="container text-center">
-
+            <c:choose>
+                <c:when test="${logado}">
     <div class="row" style="margin-top: 1.5cm">
       <div class="col-sm-6" >
             <div class="card">
@@ -28,6 +29,8 @@
            </div>
         </div>
     </div>
+        </c:when>
+    </c:choose>
             <div class="row" style="margin-top: 1.5cm">
         <div class="col-sm-6">
             <div class="card">

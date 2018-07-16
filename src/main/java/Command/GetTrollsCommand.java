@@ -21,8 +21,9 @@ import javax.servlet.http.HttpSession;
 public class GetTrollsCommand implements Comando{
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Integer id = (Integer) session.getAttribute("idUser");
         String username = "Qualquer";
-        Integer id = null;
         if (username != null || !username.isEmpty()) {
             {
                 try {
@@ -59,8 +60,16 @@ public class GetTrollsCommand implements Comando{
                         {
                             trolls.add(usuario1);
                         }
-                    }
+                    }                  
                     Boolean logado = true;
+                    if (id != null)
+                    {
+                        logado = true;
+                    }
+                    else
+                    {
+                        logado = false;
+                    }
                     request.setAttribute("usuarios", trolls);
                     request.setAttribute("logado", logado);
                     RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/trolls.jsp");

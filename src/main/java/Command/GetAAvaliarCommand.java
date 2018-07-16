@@ -34,6 +34,7 @@ public class GetAAvaliarCommand implements Comando{
                 List<Integer> idItens = cDAO.localizaItemLista(idComentarios);
                 ArrayList<Item> itens = new ArrayList<>();
                 ItemDAO iDAO = new ItemDAOJDBC();
+                List<Integer> usuarios = cDAO.localizaItemUsuario(id);
                 AvaliarItemDAO aCDAO = new AvaliarItemDAOJDBC();
                 List<Integer> idItensComentarios = aCDAO.listarItemUsuario(id);
                 for (Integer idIten : idItens) {
@@ -41,6 +42,7 @@ public class GetAAvaliarCommand implements Comando{
                     item = iDAO.exibirItem(id, idIten);
                     itens.add(item);
                 }
+                System.out.println(idItensComentarios.size());
                 List<Item> itens3 = new ArrayList<>();
                 List<Item> itens2 = iDAO.listarAllItens();
                 for (Item item : itens2) {
@@ -54,6 +56,13 @@ public class GetAAvaliarCommand implements Comando{
                     for (Integer integer : idItensComentarios)
                     {
                         if(item.getIdItem() == integer)
+                        {
+                            aComentar = false;
+                        }
+                    }
+                    for (Integer inte : usuarios)
+                    {
+                        if(item.getIdItem() == inte)
                         {
                             aComentar = false;
                         }

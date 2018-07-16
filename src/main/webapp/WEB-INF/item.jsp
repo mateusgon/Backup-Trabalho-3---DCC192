@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="jspf/cabecalho.jspf" %>
 <div class="container text-center">
-    <table class="table table-light">
+    <table class="table" style="margin-top:2rem">
         <thead>
             <tr>
                 <th scope="col">Item</th>
@@ -10,6 +10,7 @@
         <tbody>
             <tr>
                 <th>
+                    <div class="container text-left">
                     <p> Criação: ${item.dataInicial} e Atualização: ${item.dataAtualizacao}
                         <c:choose>
                             <c:when test="${item.idCriador == idUser}">
@@ -40,12 +41,13 @@
                             </c:choose>    
                         </c:when>    
                     </c:choose>        
-                </th>
+                    </div></th>
             </tr>
             <c:forEach var="comentarios" items="${comentarios}">
-                <tr>
+                    <div class="container text-rigth">
+                <th>
                     <th>
-                        <p> Criação: ${comentarios.criacao} e Atualização: ${comentarios.atualizacao}
+                        <p style="margin-left:-70px"> Criação: ${comentarios.criacao} e Atualização: ${comentarios.atualizacao}
                         <c:choose>
                             <c:when test="${comentarios.idUsuario == idUser}">
                                 <a href="comentario-editar.html?comentario=${comentarios.id}&item=${item.idItem}"> <i class="material-icons">mode_edit</i> </a>
@@ -66,6 +68,7 @@
                         ${comentarios.comentario}
                     </th>
                 </tr>
+               </div> 
             </c:forEach>
             </tr>
         </tbody>

@@ -10,4 +10,5 @@ public interface AvaliarItemDAO {
     public Integer listarEspecificoPositivo (Integer codigoItem) throws Exception;
     public Integer listarEspecificoNegativo (Integer codigoItem) throws Exception;
     public List<Integer> listarItemUsuario (Integer codigoUsiario) throws Exception;
+    public void excluir (Integer codigoItem) throws Exception;
 }

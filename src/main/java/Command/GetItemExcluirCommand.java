@@ -1,9 +1,14 @@
 package Command;
 
+import ControlBD.AvaliarComentarioDAO;
+import ControlBD.AvaliarComentarioDAOJDBC;
+import ControlBD.AvaliarItemDAO;
+import ControlBD.AvaliarItemDAOJDBC;
 import ControlBD.ComentarioDAO;
 import ControlBD.ComentarioDAOJDBC;
 import ControlBD.ItemDAO;
 import ControlBD.ItemDAOJDBC;
+import Funcionamento.Comentario;
 import Funcionamento.Item;
 import java.io.IOException;
 import java.util.List;
@@ -23,19 +28,25 @@ public class GetItemExcluirCommand implements Comando {
         if (username != null || !username.isEmpty()) {
             try {
                 Integer id2 = Integer.parseInt(request.getParameter("item"));
-                ItemDAO iDAO = new ItemDAOJDBC();
+                AvaliarComentarioDAO aDAO = new AvaliarComentarioDAOJDBC();
+                AvaliarItemDAO aIDAO = new AvaliarItemDAOJDBC();
                 ComentarioDAO cDAO = new ComentarioDAOJDBC();
+                ItemDAO iDAO = new ItemDAOJDBC();
+                List<Comentario> comentarios = cDAO.listarComentariosItem(id2);
+                for (Comentario comentario : comentarios) {
+                    aDAO.excluir(comentario.getId());
+                }
                 cDAO.excluir(id2);
+                aIDAO.excluir(id2);
                 iDAO.excluirItem(id2);
                 List<Item> itens = iDAO.listarItensUsuario(id);
                 Boolean logado = true;
                 request.setAttribute("itens", itens);
                 request.setAttribute("logado", logado);
-                RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/meus-itens.jsp");
-                dispacher.forward(request, response);
+                response.sendRedirect("item-listar.html");
                 return;
             } catch (Exception ex) {
-
+               response.sendRedirect("erro.html");
             }
 
         }

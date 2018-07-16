@@ -147,7 +147,7 @@ public class GetAvaliarCommand implements Comando{
                     }
                 }
             } catch (Exception ex) {
-
+                response.sendRedirect("erro.html");
             }
         }
         else

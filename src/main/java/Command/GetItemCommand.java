@@ -52,7 +52,8 @@ public class GetItemCommand implements Comando{
                 dispacher.forward(request, response);
                 return;
             } catch (Exception ex) {
-
+               
+               response.sendRedirect("erro.html");
             }
         }
         else

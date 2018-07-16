@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControlServlet", urlPatterns = {"/ranking-ordem.html","/item-editar.html","/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html", "/meus-itens.html", "/item-excluir.html", "/item-listar.html", "/item-editar.html", "/ranking.html", "/comentar.html", "/comentario-editar.html", "/comentario-excluir.html", "/avaliar.html", "/item.html", "/meus-comentarios.html", "/a-avaliar.html", "/curadores.html", "/trolls.html"})
+@WebServlet(name = "ControlServlet", urlPatterns = {"/ranking-ordem.html","/item-editar.html","/index.html", "/login.html", "/logout.html", "/usuario-novo.html", "/item-novo.html", "/meus-itens.html", "/item-excluir.html", "/item-listar.html", "/item-editar.html", "/ranking.html", "/comentar.html", "/comentario-editar.html", "/comentario-excluir.html", "/avaliar.html", "/item.html", "/meus-comentarios.html", "/a-avaliar.html", "/curadores.html", "/trolls.html", "/erro.html"})
 public class ControlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,6 +37,7 @@ public class ControlServlet extends HttpServlet {
        rotas.put("/a-avaliar.html", "Command.GetAAvaliarCommand");
        rotas.put("/curadores.html", "Command.GetCuradoresCommand");
        rotas.put("/trolls.html", "Command.GetTrollsCommand");
+       rotas.put("/erro.html", "Command.GetErroCommand");
        String clazzName = rotas.get(request.getServletPath());
        try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();

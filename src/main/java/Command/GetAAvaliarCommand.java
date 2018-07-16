@@ -36,10 +36,6 @@ public class GetAAvaliarCommand implements Comando{
                 ItemDAO iDAO = new ItemDAOJDBC();
                 AvaliarItemDAO aCDAO = new AvaliarItemDAOJDBC();
                 List<Integer> idItensComentarios = aCDAO.listarItemUsuario(id);
-                System.out.println(idItensComentarios.size());
-                for (Integer idItensComentario : idItensComentarios) {
-                    System.out.println(idItensComentario);
-                }
                 for (Integer idIten : idItens) {
                     Item item = new Item();
                     item = iDAO.exibirItem(id, idIten);
@@ -74,7 +70,7 @@ public class GetAAvaliarCommand implements Comando{
                 dispacher.forward(request, response);
                 return;
             } catch (Exception ex) {
-
+                response.sendRedirect("erro.html");
             }
         }
         else

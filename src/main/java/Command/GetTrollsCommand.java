@@ -69,7 +69,7 @@ public class GetTrollsCommand implements Comando{
                 }
                 catch(Exception ex)
                 {
-                    
+                    response.sendRedirect("erro.html");
                 }
 
             }

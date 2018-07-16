@@ -26,11 +26,11 @@ public class PostItemAlterarCommand implements Comando{
             Integer id = Integer.parseInt(request.getParameter("idItem"));
             iDAO.alterar(id, titulo, descricao, url);
             
-            response.sendRedirect("meus-itens.html");
+            response.sendRedirect("item-listar.html");
         }
         catch(Exception ex)
         {
-            response.sendRedirect("meus-itens.html");
+            response.sendRedirect("item-listar.html");
         }
     }
     

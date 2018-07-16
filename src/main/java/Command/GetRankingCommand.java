@@ -112,6 +112,7 @@ public class GetRankingCommand implements Comando {
                 }
             } catch (Exception ex) {
                 
+               response.sendRedirect("erro.html");
             }
         }
         } else {

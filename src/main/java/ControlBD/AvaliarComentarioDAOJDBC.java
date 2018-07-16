@@ -17,6 +17,7 @@ public class AvaliarComentarioDAOJDBC implements AvaliarComentarioDAO{
     private PreparedStatement operacaoListarPositivo;
     private PreparedStatement operacaoListarNegativo;
     private PreparedStatement operacaoListarComentarios;
+    private PreparedStatement operacaoExcluirComentarios;
    
     public AvaliarComentarioDAOJDBC() throws Exception{
         conexao = BdConnection.getConnection();
@@ -26,6 +27,7 @@ public class AvaliarComentarioDAOJDBC implements AvaliarComentarioDAO{
         operacaoListarPositivo = conexao.prepareStatement("select positiva, negativa from usuariocomentario where fk_codigoComentario = ? and positiva > 0");
         operacaoListarNegativo = conexao.prepareStatement("select positiva, negativa from usuariocomentario where fk_codigoComentario = ? and negativa > 0");
         operacaoListarComentarios = conexao.prepareStatement("select fk_codigoComentario from usuariocomentario where fk_codigoUsuario = ?");
+        operacaoExcluirComentarios = conexao.prepareStatement("delete from usuariocomentario where fk_codigoComentario = ?");
     }
 
     @Override
@@ -101,6 +103,13 @@ public class AvaliarComentarioDAOJDBC implements AvaliarComentarioDAO{
             idComentarios.add(id);
         }        
         return idComentarios;
+    }
+
+    @Override
+    public void excluir(Integer codigoComentario) throws Exception {
+       operacaoExcluirComentarios.clearParameters();
+       operacaoExcluirComentarios.setInt(1, codigoComentario);
+       operacaoExcluirComentarios.execute();
     }
     
 }

@@ -68,8 +68,8 @@ public class GetCuradoresCommand implements Comando {
                     return;
                 }
                 catch(Exception ex)
-                {
-                    
+                {               
+                    response.sendRedirect("erro.html");
                 }
 
             }

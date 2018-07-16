@@ -17,6 +17,7 @@ public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
     private PreparedStatement operacaoListarPositivo;
     private PreparedStatement operacaoListarNegativo;
     private PreparedStatement operacaoListarUsuarios;
+    private PreparedStatement operacaoExcluir;
     
     public AvaliarItemDAOJDBC() throws Exception{
         conexao = BdConnection.getConnection();
@@ -26,6 +27,7 @@ public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
         operacaoListarPositivo = conexao.prepareStatement("select positiva from usuarioitem where fk_codigoItem = ? and positiva > 0");
         operacaoListarNegativo = conexao.prepareStatement("select negativa from usuarioitem where fk_codigoItem = ? and negativa > 0");
         operacaoListarUsuarios = conexao.prepareStatement("select fk_codigoItem from usuarioitem where fk_codigoUsuario = ?");
+        operacaoExcluir = conexao.prepareStatement("delete from usuarioitem where fk_codigoItem = ?");
     }
 
     @Override
@@ -101,6 +103,13 @@ public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
             idItem.add(id);
         }        
         return idItem;
+    }
+
+    @Override
+    public void excluir(Integer codigoItem) throws Exception {
+        operacaoExcluir.clearParameters();
+        operacaoExcluir.setInt(1, codigoItem);
+        operacaoExcluir.execute();
     }
     
 }

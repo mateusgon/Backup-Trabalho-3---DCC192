@@ -10,4 +10,5 @@ public interface AvaliarComentarioDAO {
     public Integer listarEspecificoPositivo (Integer codigoComentario) throws Exception;
     public Integer listarEspecificoNegativo (Integer codigoComentario) throws Exception;
     public List<Integer> listarComentarioUsuario (Integer codigoUsuario) throws Exception;
+    public void excluir (Integer codigoComentario) throws Exception;
 }

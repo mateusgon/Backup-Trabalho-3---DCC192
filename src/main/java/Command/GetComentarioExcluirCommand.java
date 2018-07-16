@@ -1,5 +1,7 @@
 package Command;
 
+import ControlBD.AvaliarComentarioDAO;
+import ControlBD.AvaliarComentarioDAOJDBC;
 import ControlBD.ComentarioDAO;
 import ControlBD.ComentarioDAOJDBC;
 import ControlBD.ItemDAO;
@@ -25,12 +27,15 @@ public class GetComentarioExcluirCommand implements Comando{
             try {
                 Integer idItem = Integer.parseInt(request.getParameter("item"));
                 Integer idComentario = Integer.parseInt(request.getParameter("comentario"));
+                AvaliarComentarioDAO aDAO = new AvaliarComentarioDAOJDBC();
+                aDAO.excluir(idComentario);
                 ComentarioDAO cDAO = new ComentarioDAOJDBC();
                 cDAO.excluir2(idComentario);
                 response.sendRedirect("item.html?item="+idItem);
                 return;
             } catch (Exception ex) {
-
+                
+               response.sendRedirect("erro.html");
             }
 
         }

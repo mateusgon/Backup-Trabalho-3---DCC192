@@ -10,7 +10,7 @@
   
                     <label>Link: </label>
                     <input type="url" class="form-control" name="url" placeholder="Digite o link" required>
-                    <input type="submit" class="btn btn-success"/>
+                    <input type="submit" value="Enviar" class="btn btn-success"/>
                     <input type="reset" class="btn btn-secondary"/>
                 </div>
             </form>

@@ -5,13 +5,12 @@
     <h1> Todos os itens</h1>
 
     <div class="container" style="margin-top: 1cm" >
-        <ul>
-            <li><a href="ranking.html?ordem=navaliacao" />Ordernar por número de avaliações</li></a>
-            <li><a href="ranking.html?ordem=melhoravaliacao" />Ordernar por melhor avaliação</li></a>
-            <li><a href="ranking.html?ordem=datacriacao" />Ordernar por data de criação</li></a>        
-            <li><a href="ranking.html?ordem=dataatualizacao" />Ordernar por atualização mais recente</li></a>
-        </ul>
-
+       <ul class="nav nav-tabs">
+  <li class="active"><a href="ranking.html?ordem=navaliacao" />Número de avaliações</li>
+  <li style="margin-left: 1cm"><a href="ranking.html?ordem=melhoravaliacao" />Melhor avaliado </a></li>
+  <li style="margin-left: 1cm"><a href="ranking.html?ordem=datacriacao" />Data de Criação</a></li>
+  <li style="margin-left: 1cm"><a href="ranking.html?ordem=dataatualizacao" />Mais recentes</a></li>
+</ul>
             <!-- Table -->
             <table class="table" style="margin-top:2rem">
                 <thead style="background-color: black;color: white">

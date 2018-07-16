@@ -5,6 +5,8 @@ import Funcionamento.Item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
 
@@ -14,6 +16,7 @@ public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
     private PreparedStatement operacaoAtualizar;
     private PreparedStatement operacaoListarPositivo;
     private PreparedStatement operacaoListarNegativo;
+    private PreparedStatement operacaoListarUsuarios;
     
     public AvaliarItemDAOJDBC() throws Exception{
         conexao = BdConnection.getConnection();
@@ -22,6 +25,7 @@ public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
         operacaoAtualizar = conexao.prepareStatement("update usuarioitem set positiva = ?, negativa = ? where fk_codigoUsuario = ? and fk_codigoItem = ?");
         operacaoListarPositivo = conexao.prepareStatement("select positiva from usuarioitem where fk_codigoItem = ? and positiva > 0");
         operacaoListarNegativo = conexao.prepareStatement("select negativa from usuarioitem where fk_codigoItem = ? and negativa > 0");
+        operacaoListarUsuarios = conexao.prepareStatement("select fk_codigoItem from usuarioitem where fk_codigoUsuario = ?");
     }
 
     @Override
@@ -83,6 +87,20 @@ public class AvaliarItemDAOJDBC implements AvaliarItemDAO{
             contador++;
         }        
         return contador;
+    }
+
+    @Override
+    public List<Integer> listarItemUsuario(Integer codigoUsiario) throws Exception {
+        List<Integer> idItem = new ArrayList<>();
+        operacaoListarUsuarios.clearParameters();
+        operacaoListarUsuarios.setInt(1, codigoUsiario);
+        operacaoListarUsuarios.execute();
+        ResultSet resultado = operacaoListarUsuarios.executeQuery();
+        while (resultado.next()) {
+            Integer id = resultado.getInt("fk_codigoItem");
+            idItem.add(id);
+        }        
+        return idItem;
     }
     
 }

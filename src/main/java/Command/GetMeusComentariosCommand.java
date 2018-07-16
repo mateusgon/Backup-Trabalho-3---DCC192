@@ -27,10 +27,8 @@ public class GetMeusComentariosCommand implements Comando{
         Integer id = (Integer) session.getAttribute("idUser");
         if (username != null || !username.isEmpty()) {
             try {
-                AvaliarComentarioDAO aDAO = new AvaliarComentarioDAOJDBC();
-                List<Integer> idComentarios = aDAO.listarComentarioUsuario(id);
                 ComentarioDAO cDAO = new ComentarioDAOJDBC();
-                List<Integer> idItens = cDAO.localizaItemLista(idComentarios);
+                List<Integer> idItens = cDAO.localizaItemUsuario(id);
                 ArrayList<Item> itens = new ArrayList<>();
                 ItemDAO iDAO = new ItemDAOJDBC();
                 for (Integer idIten : idItens) {

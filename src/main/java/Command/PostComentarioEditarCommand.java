@@ -19,7 +19,7 @@ public class PostComentarioEditarCommand implements Comando{
            Integer idComentario = Integer.parseInt(request.getParameter("idComentario"));
            Integer idItem = Integer.parseInt(request.getParameter("idItem"));
            cDAO.alterar(idComentario, comentario);
-           response.sendRedirect("item-listar.html?item="+idItem);
+           response.sendRedirect("item.html?item="+idItem);
        }
        catch(Exception ex)
        {

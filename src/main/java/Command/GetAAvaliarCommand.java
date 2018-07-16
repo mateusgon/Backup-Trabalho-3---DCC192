@@ -2,6 +2,8 @@ package Command;
 
 import ControlBD.AvaliarComentarioDAO;
 import ControlBD.AvaliarComentarioDAOJDBC;
+import ControlBD.AvaliarItemDAO;
+import ControlBD.AvaliarItemDAOJDBC;
 import ControlBD.ComentarioDAO;
 import ControlBD.ComentarioDAOJDBC;
 import ControlBD.ItemDAO;
@@ -32,6 +34,12 @@ public class GetAAvaliarCommand implements Comando{
                 List<Integer> idItens = cDAO.localizaItemLista(idComentarios);
                 ArrayList<Item> itens = new ArrayList<>();
                 ItemDAO iDAO = new ItemDAOJDBC();
+                AvaliarItemDAO aCDAO = new AvaliarItemDAOJDBC();
+                List<Integer> idItensComentarios = aCDAO.listarItemUsuario(id);
+                System.out.println(idItensComentarios.size());
+                for (Integer idItensComentario : idItensComentarios) {
+                    System.out.println(idItensComentario);
+                }
                 for (Integer idIten : idItens) {
                     Item item = new Item();
                     item = iDAO.exibirItem(id, idIten);
@@ -43,6 +51,13 @@ public class GetAAvaliarCommand implements Comando{
                     Boolean aComentar = true;
                     for (Item iten : itens) {
                         if (item.getIdItem() == iten.getIdItem())
+                        {
+                            aComentar = false;
+                        }
+                    }
+                    for (Integer integer : idItensComentarios)
+                    {
+                        if(item.getIdItem() == integer)
                         {
                             aComentar = false;
                         }

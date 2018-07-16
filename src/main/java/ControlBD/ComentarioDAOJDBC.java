@@ -19,6 +19,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
     private PreparedStatement operacaoListar;
     private PreparedStatement operacaoListarEspecifico;
     private PreparedStatement operacaoLocalizarItem;
+    private PreparedStatement operacaoLocalizarUsuario;
     private PreparedStatement operacaoExcluir;
     private PreparedStatement operacaoExcluir2;
     private PreparedStatement operacaoAlterar;
@@ -32,6 +33,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
         operacaoListarEspecifico = conexao.prepareStatement("select codigoComentario, comentario from comentario where codigoComentario = ?");
         operacaoAlterar = conexao.prepareStatement("update comentario set comentario = ?, dataAtualizacao = ? where codigoComentario = ?");
         operacaoLocalizarItem = conexao.prepareStatement("select fk_codigoItem from comentario where codigoComentario = ?");
+        operacaoLocalizarUsuario = conexao.prepareStatement("select fk_codigoItem from comentario where fk_codigoCriador = ?");
     }
 
     @Override
@@ -139,6 +141,20 @@ public class ComentarioDAOJDBC implements ComentarioDAO{
             resultado.next();
             Integer id = resultado.getInt("fk_codigoItem");
             itens.add(id);
+        }
+        return itens;
+    }
+
+    @Override
+    public List<Integer> localizaItemUsuario(Integer idUsuario) throws Exception {
+        ArrayList<Integer> itens = new ArrayList<>();
+        operacaoLocalizarUsuario.clearParameters();
+        operacaoLocalizarUsuario.setInt(1, idUsuario);
+        ResultSet resultado = operacaoLocalizarUsuario.executeQuery();
+        while (resultado.next())
+        {
+            Integer i = resultado.getInt("fk_codigoItem");
+            itens.add(i);
         }
         return itens;
     }

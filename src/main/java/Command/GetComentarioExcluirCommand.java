@@ -27,7 +27,7 @@ public class GetComentarioExcluirCommand implements Comando{
                 Integer idComentario = Integer.parseInt(request.getParameter("comentario"));
                 ComentarioDAO cDAO = new ComentarioDAOJDBC();
                 cDAO.excluir2(idComentario);
-                response.sendRedirect("item-listar.html?item="+idItem);
+                response.sendRedirect("item.html?item="+idItem);
                 return;
             } catch (Exception ex) {
 

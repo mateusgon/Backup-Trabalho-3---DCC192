@@ -40,23 +40,23 @@ public class GetAvaliarCommand implements Comando{
                             if (valor.getPositivo() == 1)
                             {
                                 aDAO.alterar(id, item, 0, 0);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                             else if (valor.getNegativo() == 1)
                             {
                                 aDAO.alterar(id, item, 1, 0);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                             else
                             {
                                 aDAO.alterar(id, item, 1, 0);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                         }
                         catch(Exception ex)
                         {
                             aDAO.criar(id, item, 1, 0);
-                            response.sendRedirect("item-listar.html?item="+item);
+                            response.sendRedirect("item.html?item="+item);
                         }
                     }
                     else
@@ -67,23 +67,23 @@ public class GetAvaliarCommand implements Comando{
                             if(valor.getNegativo() == 1)
                             {
                                 aDAO.alterar(id, item, 0, 0);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                             else if(valor.getPositivo() == 1)
                             {
                                 aDAO.alterar(id, item, 0, 1);                                
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                             else
                             {
                                 aDAO.alterar(id, item, 0, 1);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                         }
                         catch(Exception ex)
                         {
                             aDAO.criar(id, item, 0, 1);
-                            response.sendRedirect("item-listar.html?item="+item);
+                            response.sendRedirect("item.html?item="+item);
                         }
                     }
                 }
@@ -98,23 +98,23 @@ public class GetAvaliarCommand implements Comando{
                             if (valor.getPositivo() == 1)
                             {
                                 aDAO.alterar(id, comentar, 0, 0);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                             else if (valor.getNegativo() == 1)
                             {
                                 aDAO.alterar(id, comentar, 1, 0);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                             else
                             {
                                 aDAO.alterar(id, comentar, 1, 0);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                         }
                         catch(Exception ex)
                         {
                             aDAO.criar(id, comentar, 1, 0);
-                            response.sendRedirect("item-listar.html?item="+item);
+                            response.sendRedirect("item.html?item="+item);
                         }
                     }
                     else
@@ -125,23 +125,23 @@ public class GetAvaliarCommand implements Comando{
                             if(valor.getNegativo() == 1)
                             {
                                 aDAO.alterar(id, comentar, 0, 0);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                             else if(valor.getPositivo() == 1)
                             {
                                 aDAO.alterar(id, comentar, 0, 1);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                             else
                             {
                                 aDAO.alterar(id, comentar, 0, 1);
-                                response.sendRedirect("item-listar.html?item="+item);
+                                response.sendRedirect("item.html?item="+item);
                             }
                         }
                         catch(Exception ex)
                         {
                             aDAO.criar(id, comentar, 0, 1);
-                            response.sendRedirect("item-listar.html?item="+item);
+                            response.sendRedirect("item.html?item="+item);
                             return;
                         }
                     }

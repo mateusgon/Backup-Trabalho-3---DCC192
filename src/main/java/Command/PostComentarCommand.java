@@ -24,7 +24,7 @@ public class PostComentarCommand implements Comando{
             
             ComentarioDAO cDAO = new ComentarioDAOJDBC();
             cDAO.criar(comentario, idUsuario, idItem);
-            response.sendRedirect("item-listar.html?item=" + idItem);
+            response.sendRedirect("item.html?item=" + idItem);
         } catch (Exception ex) {
             response.sendRedirect("index.html");
         }
